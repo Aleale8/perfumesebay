@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-import re
 import matplotlib.pyplot as plt # <--- IMPORTANTE: Esta línea es obligatoria
 
 # Configuración del backend para evitar errores de hilos en servidores web
