@@ -78,7 +78,7 @@ else:
 
 # Encabezado y Bienvenida
  with st.container():
-    st.markdown("""
+     st.markdown("""
         <div style='
             background-color: #FEEFEF; 
             padding: 30px; 
