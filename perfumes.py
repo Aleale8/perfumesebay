@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
-import matplotlib.pyplot as plt  # <--- ESTA LÍNEA ES LA CLAVE
+import matplotlib  # ✅ AGREGAR ESTA LÍNEA
+import matplotlib.pyplot as plt
 import re
 
 # Configuración para evitar errores de hilos en Streamlit (Opcional pero recomendado)
