@@ -2,8 +2,8 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 
-# --- 1. CONFIGURACIÓN Y CARGA ---
-st.set_page_config(page_title="Perfumes eBay - Avanzado", layout="wide")
+# --- 1. CONFIGURACIÓN Y CARGA DE DATOS ---
+st.set_page_config(page_title="Perfumes eBay - Proyecto Final", layout="wide")
 
 @st.cache_data
 def cargar_datos():
@@ -21,7 +21,7 @@ def cargar_datos():
     except FileNotFoundError:
         return None
 
-# Limpieza
+# Funciones de Limpieza
 def limpiar_precio(texto):
     if pd.isna(texto): return 0.0
     texto_limpio = ''.join(filter(lambda x: x.isdigit() or x == '.', str(texto)))
@@ -42,11 +42,13 @@ else:
     st.error("Error: Archivos no encontrados.")
     st.stop()
 
-# --- 2. SIDEBAR (FILTROS PRINCIPALES) ---
-st.sidebar.header("🔍 Filtros Generales")
+# --- 2. BARRA LATERAL (FILTROS GLOBALES) ---
+st.sidebar.title("🔍 Panel de Control")
+st.sidebar.markdown("Filtros para analizar el mercado.")
+
 genero_selec = st.sidebar.radio("Género:", ["Ambos", "Hombre", "Mujer"])
 
-# Aplicar filtro de género globalmente
+# Aplicar filtro global
 if genero_selec == "Hombre": df_global = df[df['Genero'] == 'Hombre']
 elif genero_selec == "Mujer": df_global = df[df['Genero'] == 'Mujer']
 else: df_global = df
@@ -55,76 +57,103 @@ else: df_global = df
 
 # Bienvenida
 with st.container():
-    st.title("✨ Dashboard de Mercado de Perfumes")
-    st.markdown("Análisis interactivo de ventas y precios.")
+    st.title("✨ Análisis de Mercado: Perfumes eBay")
+    st.markdown("Dashboard interactivo para visualizar tendencias de precios y ventas.")
+    
+    # Métricas Globales
+    col1, col2, col3, col4 = st.columns(4)
+    col1.metric("Total Productos", df_global.shape[0])
+    col2.metric("Precio Promedio", f"${df_global['Precio'].mean():.2f}")
+    col3.metric("Total Ventas", f"{df_global['Vendidos'].sum():,.0f}")
+    col4.metric("Marcas Únicas", df_global['Marca'].nunique())
+    
     st.markdown("---")
 
-# SECCIÓN 1: ANÁLISIS DE VENTAS (Gráfico de Barras)
-st.subheader("📊 Top Ventas")
-col_filtros, col_grafico = st.columns([1, 3])
+# --- SECCIÓN 1: DISTRIBUCIÓN (Gráfico de Torta - NUEVO) ---
+st.subheader("1. Composición del Mercado")
+col_pie1, col_pie2 = st.columns([1, 2])
 
-with col_filtros:
-    st.markdown("**Configuración de Ventas:**")
-    lista_marcas = sorted(df_global['Marca'].astype(str).unique())
-    marca_ventas = st.selectbox("Filtrar Marca (Ventas):", ["Todas"] + lista_marcas)
+with col_pie1:
+    st.info("Este gráfico muestra la proporción de productos en la base de datos según el género.")
 
-with col_grafico:
-    if marca_ventas == "Todas":
-        data_ventas = df_global.groupby('Marca')['Vendidos'].sum().sort_values(ascending=False).head(10).reset_index()
-        fig_ventas = px.bar(data_ventas, x='Marca', y='Vendidos', color='Vendidos', 
-                            title="Top 10 Marcas Más Vendidas", color_continuous_scale='Viridis')
+with col_pie2:
+    # GRÁFICO 1 DE 4: TORTA (PIE CHART)
+    if genero_selec == "Ambos":
+        fig_pie = px.pie(
+            df_global, 
+            names='Genero', 
+            title='Distribución de Productos por Género',
+            color='Genero',
+            color_discrete_map={'Hombre':'#3366CC', 'Mujer':'#FF66B2'},
+            hole=0.4 # Lo convierte en una Donut (más moderno)
+        )
+        st.plotly_chart(fig_pie, use_container_width=True)
     else:
-        data_ventas = df_global[df_global['Marca'] == marca_ventas].sort_values('Vendidos', ascending=False).head(10)
-        fig_ventas = px.bar(data_ventas, x='Vendidos', y='Titulo', orientation='h', 
-                            title=f"Top Productos: {marca_ventas}", color='Vendidos')
-    
-    st.plotly_chart(fig_ventas, use_container_width=True)
+        st.warning("Selecciona 'Ambos' en el filtro de Género para ver la comparación en el gráfico de torta.")
 
 st.divider()
 
-# SECCIÓN 2: COMPARADOR DE PRECIOS (NUEVO - Gráfico de Caja)
-st.subheader("💸 Comparador de Precios entre Marcas")
-st.markdown("Selecciona varias marcas para comparar sus rangos de precios (Mínimo, Máximo y Promedio).")
+# --- SECCIÓN 2: ANÁLISIS DE VENTAS (Gráfico de Barras) ---
+st.subheader("2. Ranking de Ventas")
+col_bar1, col_bar2 = st.columns([1, 3])
 
-# Filtro específico para este gráfico (Multiselect)
-# Usamos df_global para que respete si eligió "Hombre" o "Mujer" arriba
-top_marcas_default = df_global['Marca'].value_counts().head(5).index.tolist() # Pre-seleccionamos las top 5
-marcas_comparar = st.multiselect(
-    "Selecciona las marcas a comparar:",
-    options=lista_marcas,
-    default=top_marcas_default # Empieza con 5 marcas seleccionadas
-)
+with col_bar1:
+    st.markdown("Explora las marcas líderes.")
+    lista_marcas = sorted(df_global['Marca'].astype(str).unique())
+    marca_ventas = st.selectbox("Selecciona Marca:", ["Todas"] + lista_marcas)
 
-if marcas_comparar:
-    # Filtramos los datos solo para las marcas seleccionadas
-    df_comparacion = df_global[df_global['Marca'].isin(marcas_comparar)]
+with col_bar2:
+    # GRÁFICO 2 DE 4: BARRAS
+    if marca_ventas == "Todas":
+        data_ventas = df_global.groupby('Marca')['Vendidos'].sum().sort_values(ascending=False).head(10).reset_index()
+        fig_bar = px.bar(data_ventas, x='Marca', y='Vendidos', color='Vendidos', 
+                         title="Top 10 Marcas Más Vendidas", color_continuous_scale='Viridis')
+    else:
+        data_ventas = df_global[df_global['Marca'] == marca_ventas].sort_values('Vendidos', ascending=False).head(10)
+        fig_bar = px.bar(data_ventas, x='Vendidos', y='Titulo', orientation='h', 
+                         title=f"Top Productos: {marca_ventas}", color='Vendidos')
     
-    # GRÁFICO DE CAJA (BOX PLOT) - Requisito: Estilo diferente
-    # Points='all' muestra también los puntos individuales (perfumes)
-    fig_precios = px.box(
-        df_comparacion, 
-        x='Marca', 
-        y='Precio', 
-        color='Marca',
-        title="Distribución de Precios por Marca",
-        points="outliers" # Muestra puntos atípicos (perfumes muy caros)
+    st.plotly_chart(fig_bar, use_container_width=True)
+
+st.divider()
+
+# --- SECCIÓN 3: PRECIOS Y TENDENCIAS (Cajas y Dispersión) ---
+st.subheader("3. Análisis de Precios y Tendencias")
+
+tab1, tab2 = st.tabs(["📊 Comparador de Precios", "📉 Relación Precio vs. Ventas"])
+
+with tab1:
+    st.markdown("**Comparativa de rangos de precio entre marcas**")
+    top_marcas_default = df_global['Marca'].value_counts().head(5).index.tolist()
+    marcas_comparar = st.multiselect("Marcas a comparar:", options=lista_marcas, default=top_marcas_default)
+    
+    if marcas_comparar:
+        df_comp = df_global[df_global['Marca'].isin(marcas_comparar)]
+        # GRÁFICO 3 DE 4: CAJA (BOX PLOT)
+        fig_box = px.box(df_comp, x='Marca', y='Precio', color='Marca', points="outliers",
+                         title="Distribución de Precios (Box Plot)")
+        st.plotly_chart(fig_box, use_container_width=True)
+    else:
+        st.info("Selecciona marcas para comparar.")
+
+with tab2:
+    st.markdown("**¿Los perfumes más caros se venden menos? (Scatter Plot)**")
+    # GRÁFICO 4 DE 4: DISPERSIÓN (SCATTER PLOT) - NUEVO
+    # Filtramos precios extremos para que el gráfico se vea bien (menos de $200)
+    df_scatter = df_global[df_global['Precio'] < 300] 
+    
+    fig_scatter = px.scatter(
+        df_scatter, 
+        x='Precio', 
+        y='Vendidos', 
+        color='Genero',
+        hover_data=['Marca', 'Titulo'], # Información extra al pasar el mouse
+        title="Correlación: Precio vs. Unidades Vendidas",
+        opacity=0.6 # Transparencia para ver puntos superpuestos
     )
-    
-    fig_precios.update_layout(xaxis_title="Marca", yaxis_title="Precio ($ USD)")
-    
-    st.plotly_chart(fig_precios, use_container_width=True)
-    
-    # Explicación para la defensa oral
-    with st.expander("ℹ️ ¿Cómo leer este gráfico?"):
-        st.write("""
-        - La **caja** muestra dónde están la mayoría de los precios (del 25% al 75%).
-        - La **línea dentro de la caja** es la Mediana (el precio central).
-        - Los **bigotes (líneas)** muestran el rango normal de precios.
-        - Los **puntos sueltos** son "Outliers" (perfumes inusualmente caros o baratos).
-        """)
-else:
-    st.info("Selecciona al menos una marca para ver la comparación.")
+    st.plotly_chart(fig_scatter, use_container_width=True)
+    st.caption("Nota: Se han filtrado productos con precio > $300 para mejorar la visualización.")
 
-# Tabla de datos al final
-with st.expander("Ver Datos Crudos"):
+# --- DATOS CRUDOS ---
+with st.expander("Ver Base de Datos Completa"):
     st.dataframe(df_global)
