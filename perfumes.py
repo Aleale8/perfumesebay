@@ -135,25 +135,44 @@ with tab1:
         st.plotly_chart(fig_box, use_container_width=True)
     else:
         st.info("Selecciona marcas para comparar.")
-
 with tab2:
-    st.markdown("**¿Los perfumes más caros se venden menos? (Scatter Plot)**")
-    # GRÁFICO 4 DE 4: DISPERSIÓN (SCATTER PLOT) - NUEVO
-    # Filtramos precios extremos para que el gráfico se vea bien (menos de $200)
-    df_scatter = df_global[df_global['Precio'] < 300] 
+    st.markdown("#### 📉 Análisis de Correlación: Precio vs. Ventas")
+    
+    # 1. Calculamos la correlación matemática (Requisito: Análisis de datos)
+    # Usamos todo el dataframe global, no solo el filtrado por precio visual
+    correlacion = df_global['Precio'].corr(df_global['Vendidos'])
+    
+    # Interpretación automática para el usuario
+    if correlacion < 0:
+        texto_corr = "Negativa (A mayor precio, menor venta)"
+    elif correlacion > 0:
+        texto_corr = "Positiva (A mayor precio, mayor venta)"
+    else:
+        texto_corr = "Neutra (No hay relación aparente)"
+
+    # Mostramos la métrica grande
+    col_metric, col_text = st.columns([1, 3])
+    col_metric.metric("Coeficiente de Pearson (r)", f"{correlacion:.4f}")
+    col_text.info(f"**Interpretación:** La correlación es **{texto_corr}**. En datos de retail, es común ver valores cercanos a 0 o negativos débiles, ya que el precio no es el único factor de compra.")
+
+    # 2. Gráfico Mejorado (Escala Logarítmica)
+    # Filtramos precios extremos solo para el gráfico, no para el cálculo
+    df_scatter = df_global[(df_global['Precio'] < 500) & (df_global['Precio'] > 0)]
     
     fig_scatter = px.scatter(
         df_scatter, 
         x='Precio', 
         y='Vendidos', 
         color='Genero',
-        hover_data=['Marca', 'Titulo'], # Información extra al pasar el mouse
-        title="Correlación: Precio vs. Unidades Vendidas",
-        opacity=0.6 # Transparencia para ver puntos superpuestos
+        title="Dispersión: Precio vs. Unidades Vendidas (Escala Log)",
+        opacity=0.5,
+        trendline="ols", # Agrega línea de tendencia automática (Necesita statsmodels)
+        log_y=True # <--- ESTO ES CLAVE: Escala logarítmica para ver mejor los datos
     )
+    
     st.plotly_chart(fig_scatter, use_container_width=True)
-    st.caption("Nota: Se han filtrado productos con precio > $300 para mejorar la visualización.")
-
+    st.caption("Nota: Se aplicó escala logarítmica en el eje vertical para visualizar mejor la distribución de productos con pocas y muchas ventas.")
+    
 # --- DATOS CRUDOS ---
 with st.expander("Ver Base de Datos Completa"):
     st.dataframe(df_global)
