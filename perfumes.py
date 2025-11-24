@@ -78,7 +78,7 @@ else:
 
 # Encabezado y Bienvenida
  with st.container():
-     st.markdown("""
+      st.markdown("""
         <div style='
             background-color: #FEEFEF; 
             padding: 30px; 
@@ -106,7 +106,7 @@ else:
         </div>
         """, unsafe_allow_html=True)
         st.markdown("---") # Línea separadora
-
+     
     
     # KPIs / Métricas
     kpi1, kpi2, kpi3, kpi4 = st.columns(4)
