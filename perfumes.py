@@ -77,9 +77,36 @@ else:
 # --- 3. CONTENIDO PRINCIPAL ---
 
 # Encabezado y Bienvenida
-with st.container():
-    st.title("✨ Análisis de Mercado: Perfumes eBay")
-    st.markdown("Dashboard interactivo para visualizar precios, ventas y tendencias de mercado.")
+ with st.container():
+        st.markdown("""
+        <div style='
+            background-color: #FEEFEF; 
+            padding: 30px; 
+            border-radius: 15px; 
+            border: 2px solid #6F4E37; /* Borde sutil café */
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
+        '>
+            <h1 style='
+                text-align: center; 
+                color: #6F4E37; /* Título en Café */
+                font-family: Georgia, serif; /* Fuente Refinada */
+                font-size: 2.5em;
+            '>
+                ✨ Análisis de Mercado de Perfumes eBay 💖
+            </h1>
+            <p style='
+                text-align: center; 
+                font-size: 1.2em;
+                color: #333333; 
+                font-family: Georgia, serif; /* Fuente Refinada */
+                margin-top: 10px;
+            '>
+                Bienvenido a la herramienta de visualización interactiva. Utiliza los filtros de la izquierda para explorar datos de perfumes de hombre y mujer. 🐰
+            </p>
+        </div>
+        """, unsafe_allow_html=True)
+        st.markdown("---") # Línea separadora
+
     
     # KPIs / Métricas
     kpi1, kpi2, kpi3, kpi4 = st.columns(4)
