@@ -152,29 +152,43 @@ with tab1:
         st.info("Selecciona marcas para comparar.")
 
 with tab2:
-    st.markdown("#### 📉 Análisis de Correlación: Precio vs. Ventas")
+    st.markdown("#### 📍 Distribución de Precios por Marca (Gráfico de Puntos)")
+    st.info("Este gráfico muestra cada perfume como un punto individual. Permite ver rápidamente qué marcas tienen productos más caros o baratos.")
+
+    # 1. Filtro para este gráfico: Elegir Top Marcas para no saturar
+    # Seleccionamos automáticamente las 10 marcas con más productos para que el gráfico se vea lleno
+    top_10_marcas = df_global['Marca'].value_counts().head(10).index.tolist()
     
-    # 1. Calculamos la correlación matemática (Requisito: Análisis de datos)
-    # Usamos todo el dataframe global, no solo el filtrado por precio visual
-    correlacion = df_global['Precio'].corr(df_global['Vendidos'])
-    
-    # Interpretación automática para el usuario
-    if correlacion < 0:
-        texto_corr = "Negativa (A mayor precio, menor venta)"
-    elif correlacion > 0:
-        texto_corr = "Positiva (A mayor precio, mayor venta)"
+    # Permitimos al usuario cambiar si quiere, pero por defecto mostramos el Top 10
+    marcas_puntos = st.multiselect(
+        "Selecciona Marcas para visualizar sus puntos:",
+        options=sorted(df_global['Marca'].unique()),
+        default=top_10_marcas
+    )
+
+    if marcas_puntos:
+        df_strip = df_global[df_global['Marca'].isin(marcas_puntos)]
+        
+        # 2. GRÁFICO DE PUNTOS (STRIP PLOT) - Reemplaza al Scatter
+        fig_strip = px.strip(
+            df_strip, 
+            x='Marca',       # En el eje X van las marcas (categorías)
+            y='Precio',      # En el eje Y va el precio (altura del punto)
+            color='Genero',  # Colores diferenciados
+            hover_data=['Titulo', 'Vendidos'], # Qué sale al pasar el mouse
+            title="Detalle de Precios por Producto y Marca",
+            stripmode='overlay' # Los puntos se superponen ligeramente para ver densidad
+        )
+        
+        # Mejoramos la estética
+        fig_strip.update_layout(yaxis_title="Precio ($)")
+        fig_strip.update_traces(marker=dict(size=6, opacity=0.7)) # Puntos un poco más grandes y transparentes
+        
+        st.plotly_chart(fig_strip, use_container_width=True)
+        st.caption("Nota: Cada punto representa un perfume único en la base de datos.")
+        
     else:
-        texto_corr = "Neutra (No hay relación aparente)"
-
-    # Mostramos la métrica grande
-    col_metric, col_text = st.columns([1, 3])
-    col_metric.metric("Coeficiente de Pearson (r)", f"{correlacion:.4f}")
-    col_text.info(f"**Interpretación:** La correlación es **{texto_corr}**. En datos de retail, es común ver valores cercanos a 0 o negativos débiles, ya que el precio no es el único factor de compra. Otros factores como la marca, disponibilidad y demanda también influyen.")
-
-    # 2. Gráfico Mejorado (Escala Logarítmica)
-    # Filtramos precios extremos solo para el gráfico, no para el cálculo
-    df_scatter = df_global[(df_global['Precio'] < 500) & (df_global['Precio'] > 0)]
-    
+        st.warning("Selecciona al menos una marca para ver los puntos.")
     if len(df_scatter) > 0:
         try:
             fig_scatter = px.scatter(
