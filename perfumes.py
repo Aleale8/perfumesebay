@@ -18,18 +18,23 @@ def cargar_datos():
             'available': 'Disponibles', 'sold': 'Vendidos_Texto', 'itemLocation': 'Ubicacion'
         })
         return df_unido
-    except FileNotFoundError:
+    except FileNotFoundError as e:
+        st.error(f"Error: Archivos no encontrados. {str(e)}")
         return None
 
 # Funciones de Limpieza
 def limpiar_precio(texto):
-    if pd.isna(texto): return 0.0
+    if pd.isna(texto): 
+        return 0.0
     texto_limpio = ''.join(filter(lambda x: x.isdigit() or x == '.', str(texto)))
-    try: return float(texto_limpio)
-    except: return 0.0
+    try: 
+        return float(texto_limpio)
+    except: 
+        return 0.0
 
 def limpiar_vendidos(texto):
-    if pd.isna(texto): return 0
+    if pd.isna(texto): 
+        return 0
     texto_limpio = ''.join(filter(str.isdigit, str(texto)))
     return int(texto_limpio) if texto_limpio else 0
 
@@ -39,7 +44,7 @@ if df is not None:
     df['Precio'] = df['Precio_Texto'].apply(limpiar_precio)
     df['Vendidos'] = df['Vendidos_Texto'].apply(limpiar_vendidos)
 else:
-    st.error("Error: Archivos no encontrados.")
+    st.error("Error: No se pudieron cargar los datos. Verifica que los archivos CSV existan.")
     st.stop()
 
 # --- 2. BARRA LATERAL (FILTROS GLOBALES) ---
@@ -49,9 +54,12 @@ st.sidebar.markdown("Filtros para analizar el mercado.")
 genero_selec = st.sidebar.radio("Género:", ["Ambos", "Hombre", "Mujer"])
 
 # Aplicar filtro global
-if genero_selec == "Hombre": df_global = df[df['Genero'] == 'Hombre']
-elif genero_selec == "Mujer": df_global = df[df['Genero'] == 'Mujer']
-else: df_global = df
+if genero_selec == "Hombre": 
+    df_global = df[df['Genero'] == 'Hombre']
+elif genero_selec == "Mujer": 
+    df_global = df[df['Genero'] == 'Mujer']
+else: 
+    df_global = df
 
 # --- 3. CONTENIDO PRINCIPAL ---
 
@@ -63,9 +71,16 @@ with st.container():
     # Métricas Globales
     col1, col2, col3, col4 = st.columns(4)
     col1.metric("Total Productos", df_global.shape[0])
-    col2.metric("Precio Promedio", f"${df_global['Precio'].mean():.2f}")
-    col3.metric("Total Ventas", f"{df_global['Vendidos'].sum():,.0f}")
-    col4.metric("Marcas Únicas", df_global['Marca'].nunique())
+    
+    # Validar que hay datos antes de calcular
+    precio_promedio = df_global['Precio'].mean() if len(df_global) > 0 else 0
+    col2.metric("Precio Promedio", f"${precio_promedio:.2f}")
+    
+    vendidos_total = df_global['Vendidos'].sum() if len(df_global) > 0 else 0
+    col3.metric("Total Ventas", f"{vendidos_total:,.0f}")
+    
+    marcas_unicas = df_global['Marca'].nunique() if len(df_global) > 0 else 0
+    col4.metric("Marcas Únicas", marcas_unicas)
     
     st.markdown("---")
 
@@ -135,6 +150,7 @@ with tab1:
         st.plotly_chart(fig_box, use_container_width=True)
     else:
         st.info("Selecciona marcas para comparar.")
+
 with tab2:
     st.markdown("#### 📉 Análisis de Correlación: Precio vs. Ventas")
     
@@ -153,25 +169,31 @@ with tab2:
     # Mostramos la métrica grande
     col_metric, col_text = st.columns([1, 3])
     col_metric.metric("Coeficiente de Pearson (r)", f"{correlacion:.4f}")
-    col_text.info(f"**Interpretación:** La correlación es **{texto_corr}**. En datos de retail, es común ver valores cercanos a 0 o negativos débiles, ya que el precio no es el único factor de compra.")
+    col_text.info(f"**Interpretación:** La correlación es **{texto_corr}**. En datos de retail, es común ver valores cercanos a 0 o negativos débiles, ya que el precio no es el único factor de compra. Otros factores como la marca, disponibilidad y demanda también influyen.")
 
     # 2. Gráfico Mejorado (Escala Logarítmica)
     # Filtramos precios extremos solo para el gráfico, no para el cálculo
     df_scatter = df_global[(df_global['Precio'] < 500) & (df_global['Precio'] > 0)]
     
-    fig_scatter = px.scatter(
-        df_scatter, 
-        x='Precio', 
-        y='Vendidos', 
-        color='Genero',
-        title="Dispersión: Precio vs. Unidades Vendidas (Escala Log)",
-        opacity=0.5,
-        trendline="ols", # Agrega línea de tendencia automática (Necesita statsmodels)
-        log_y=True # <--- ESTO ES CLAVE: Escala logarítmica para ver mejor los datos
-    )
-    
-    st.plotly_chart(fig_scatter, use_container_width=True)
-    st.caption("Nota: Se aplicó escala logarítmica en el eje vertical para visualizar mejor la distribución de productos con pocas y muchas ventas.")
+    if len(df_scatter) > 0:
+        try:
+            fig_scatter = px.scatter(
+                df_scatter, 
+                x='Precio', 
+                y='Vendidos', 
+                color='Genero',
+                title="Dispersión: Precio vs. Unidades Vendidas (Escala Log)",
+                opacity=0.5,
+                trendline="ols", # Agrega línea de tendencia automática (Necesita statsmodels)
+                log_y=True # <--- ESTO ES CLAVE: Escala logarítmica para ver mejor los datos
+            )
+            st.plotly_chart(fig_scatter, use_container_width=True)
+            st.caption("Nota: Se aplicó escala logarítmica en el eje vertical para visualizar mejor la distribución de productos con pocas y muchas ventas.")
+        except Exception as e:
+            st.warning(f"No se pudo generar el gráfico de dispersión: {str(e)}")
+            st.info("Intenta instalar: pip install statsmodels")
+    else:
+        st.warning("No hay datos disponibles para mostrar el gráfico de dispersión.")
     
 # --- DATOS CRUDOS ---
 with st.expander("Ver Base de Datos Completa"):
