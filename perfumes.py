@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-import matplotlib.pyplot as plt # Librería para gráficos obligatoria
+
 import re
 
 # --- CONFIGURACIÓN DE PÁGINA ---
