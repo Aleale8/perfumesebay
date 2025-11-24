@@ -100,4 +100,58 @@ if df is not None:
     # Bienvenida (Shape)
     with st.container():
         st.markdown("""
-        <div style='background-color: #E6F3FF; padding: 20px; border-radius: 10px; border-
+        <div style='background-color: #E6F3FF; padding: 20px; border-radius: 10px; border-left: 5px solid #3366CC;'>
+            <h2 style='color: #000; margin:0;'>📊 Dashboard de Perfumes eBay</h2>
+            <p style='margin:0;'>Análisis de precios, marcas y tendencias de mercado.</p>
+        </div>
+        <br>
+        """, unsafe_allow_html=True)
+
+    # Métricas
+    col1, col2, col3 = st.columns(3)
+    col1.metric("Resultados", df_final.shape[0])
+    col2.metric("Precio Promedio", f"${df_final['Precio'].mean():.2f}")
+    col3.metric("Total Vendidos", f"{df_final['Vendidos'].sum():,.0f}")
+    
+    st.divider()
+
+    # --- GRÁFICOS (MATPLOTLIB) ---
+    st.subheader("📈 Visualizaciones")
+    
+    col_graf1, col_graf2 = st.columns(2)
+
+    with col_graf1:
+        # GRÁFICO 1: BARRAS (Cantidad por Género)
+        mostrar_barras = st.checkbox("Ver Cantidad por Género", value=True)
+        if mostrar_barras:
+            conteo = df_final['Genero'].value_counts()
+            if not conteo.empty:
+                fig1, ax1 = plt.subplots(figsize=(5, 4))
+                colores = ['#1f77b4' if x == 'Hombre' else '#e377c2' for x in conteo.index]
+                ax1.bar(conteo.index, conteo.values, color=colores)
+                ax1.set_title("Cantidad de Publicaciones")
+                ax1.set_ylabel("Cantidad")
+                st.pyplot(fig1) # <--- Aquí usamos Matplotlib
+            else:
+                st.info("Sin datos para graficar.")
+
+    with col_graf2:
+        # GRÁFICO 2: HISTOGRAMA (Distribución de Precios)
+        mostrar_hist = st.checkbox("Ver Distribución de Precios")
+        if mostrar_hist:
+            if not df_final.empty:
+                fig2, ax2 = plt.subplots(figsize=(5, 4))
+                ax2.hist(df_final['Precio'], bins=15, color='teal', edgecolor='white', alpha=0.7)
+                ax2.set_title("Distribución de Precios ($)")
+                ax2.set_xlabel("Precio")
+                ax2.set_ylabel("Frecuencia")
+                st.pyplot(fig2) # <--- Aquí usamos Matplotlib
+            else:
+                st.info("Sin datos para graficar.")
+
+    # --- TABLA DE DATOS ---
+    st.subheader("📋 Detalle de Datos")
+    st.dataframe(df_final[['Marca', 'Titulo', 'Precio', 'Vendidos', 'Ubicacion', 'Genero']], use_container_width=True)
+
+else:
+    st.error("Error: No se encuentran los archivos CSV. Verifica tu carpeta.")
