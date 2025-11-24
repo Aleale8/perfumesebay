@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
-import matplotlib.pyplot as plt 
 import re
+import matplotlib.pyplot as plt  # <--- ¡ESTA ES LA LÍNEA QUE FALTA!
 
 # --- CONFIGURACIÓN DE PÁGINA ---
 st.set_page_config(page_title="Perfumes eBay", layout="wide")
