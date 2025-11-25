@@ -235,3 +235,4 @@ with tab2:
 # --- DATOS FINALES ---
 with st.expander("Ver Base de Datos Completa"):
     st.dataframe(df_global)
+
