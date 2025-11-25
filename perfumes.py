@@ -77,7 +77,7 @@ else:
 # --- 3. CONTENIDO PRINCIPAL ---
 
 # Encabezado y Bienvenida
- with st.container():
+with st.container():
       st.markdown("""
         <div style='
             background-color: #FEEFEF; 
