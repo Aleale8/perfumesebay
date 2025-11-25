@@ -105,7 +105,7 @@ with st.container():
             </p>
         </div>
         """, unsafe_allow_html=True)
-    st.markdown("---") # Línea separadora
+        st.markdown("---") # Línea separadora
      
     
     # KPIs / Métricas
