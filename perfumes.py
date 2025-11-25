@@ -78,34 +78,25 @@ else:
 
 # Encabezado y Bienvenida
 with st.container():
-      st.markdown("""
+    st.markdown("""
         <div style='
             background-color: #FEEFEF; 
             padding: 30px; 
             border-radius: 15px; 
-            border: 2px solid #6F4E37; /* Borde sutil café */
+            border: 2px solid #6F4E37;
             box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
         '>
-            <h1 style='
-                text-align: center; 
-                color: #6F4E37; /* Título en Café */
-                font-family: Georgia, serif; /* Fuente Refinada */
-                font-size: 2.5em;
-            '>
+            <h1 style='text-align: center; color: #6F4E37; font-family: Georgia, serif; font-size: 2.5em;'>
                 ✨ Análisis de Mercado de Perfumes eBay 💖
             </h1>
-            <p style='
-                text-align: center; 
-                font-size: 1.2em;
-                color: #333333; 
-                font-family: Georgia, serif; /* Fuente Refinada */
-                margin-top: 10px;
-            '>
+            <p style='text-align: center; font-size: 1.2em; color: #333333; font-family: Georgia, serif; margin-top: 10px;'>
                 Bienvenido a la herramienta de visualización interactiva. Utiliza los filtros de la izquierda para explorar datos de perfumes de hombre y mujer. 🐰
             </p>
         </div>
         """, unsafe_allow_html=True)
-    st.markdown("---")# Línea separadora
+    
+    st.markdown("---") 
+
     # KPIs / Métricas
     kpi1, kpi2, kpi3, kpi4 = st.columns(4)
     kpi1.metric("Total Productos", df_global.shape[0])
@@ -124,7 +115,7 @@ with col_pie1:
 
 with col_pie2:
     if genero_selec == "Ambos":
-        # GRÁFICO 1: TORTA (Donut)
+        # GRÁFICO 1: TORTA
         fig_pie = px.pie(
             df_global, 
             names='Genero', 
@@ -146,20 +137,18 @@ col_bar1, col_bar2 = st.columns([1, 3])
 with col_bar1:
     st.markdown("**Explora las marcas líderes.**")
     lista_marcas = sorted(df_global['Marca'].astype(str).unique())
-    # Selector de marca específico para este gráfico
+    # Selector de marca
     marca_ventas = st.selectbox("Selecciona una Marca:", ["Todas"] + lista_marcas)
 
 with col_bar2:
     # GRÁFICO 2: BARRAS
     if marca_ventas == "Todas":
-        # Top 10 Marcas Globales
         data_ventas = df_global.groupby('Marca')['Vendidos'].sum().sort_values(ascending=False).head(10).reset_index()
         fig_bar = px.bar(
             data_ventas, x='Marca', y='Vendidos', color='Vendidos', 
             title="Top 10 Marcas Más Vendidas", color_continuous_scale='Viridis'
         )
     else:
-        # Top 10 Productos de una Marca
         data_ventas = df_global[df_global['Marca'] == marca_ventas].sort_values('Vendidos', ascending=False).head(10)
         fig_bar = px.bar(
             data_ventas, x='Vendidos', y='Titulo', orientation='h', 
@@ -170,41 +159,36 @@ with col_bar2:
 
 st.divider()
 
-# --- SECCIÓN GRÁFICA 3 y 4: PESTAÑAS (TABS) ---
+# --- SECCIÓN GRÁFICA 3, 4 y 5: PESTAÑAS (TABS) ---
 st.subheader("3. Análisis Detallado de Precios")
 
-tab1, tab2 = st.tabs(["📊 Comparador de Rangos (Cajas)", "📍 Distribución por Marca (Puntos)"])
+# Definimos 3 pestañas: Cajas, Puntos y Violín
+tab1, tab2, tab3 = st.tabs(["📊 Comparador (Cajas)", "📍 Distribución (Puntos)", "🎻 Densidad (Violín)"])
 
 # PESTAÑA 1: BOX PLOT
 with tab1:
-    st.markdown("**Comparativa de precios entre marcas (Mínimo, Máximo y Mediana)**")
-    
-    # Seleccionamos las top 5 marcas por defecto para que no salga vacío
+    st.markdown("**Comparativa de precios entre marcas**")
     top_marcas_default = df_global['Marca'].value_counts().head(5).index.tolist()
     marcas_comparar = st.multiselect("Marcas a comparar:", options=lista_marcas, default=top_marcas_default, key="multi_box")
     
     if marcas_comparar:
         df_comp = df_global[df_global['Marca'].isin(marcas_comparar)]
-        # GRÁFICO 3: CAJA (BOX PLOT)
+        # GRÁFICO 3: BOX PLOT
         fig_box = px.box(
             df_comp, x='Marca', y='Precio', color='Marca', 
-            points="outliers", # Muestra puntos atípicos
+            points="outliers", 
             title="Distribución de Precios (Box Plot)"
         )
         st.plotly_chart(fig_box, use_container_width=True)
     else:
         st.info("Selecciona al menos una marca para comparar.")
 
-# PESTAÑA 2: STRIP PLOT (PUNTOS) - EL QUE PEDISTE
+# PESTAÑA 2: STRIP PLOT (PUNTOS)
 with tab2:
-    st.markdown("**Visualización de densidad de precios (Cada punto es un perfume)**")
-    
-    # Usamos las mismas marcas o un nuevo selector
-    # Para simplificar, usamos las top 10 marcas presentes
+    st.markdown("**Visualización de densidad de precios (Puntos)**")
     top_10_marcas = df_global['Marca'].value_counts().head(10).index.tolist()
-    
     marcas_puntos = st.multiselect(
-        "Selecciona Marcas para ver sus puntos:", 
+        "Selecciona Marcas:", 
         options=lista_marcas, 
         default=top_10_marcas,
         key="multi_strip"
@@ -212,25 +196,40 @@ with tab2:
     
     if marcas_puntos:
         df_strip = df_global[df_global['Marca'].isin(marcas_puntos)]
-        
-        # GRÁFICO 4: PUNTOS (STRIP PLOT)
+        # GRÁFICO 4: STRIP PLOT
         fig_strip = px.strip(
-            df_strip, 
-            x='Marca', 
-            y='Precio', 
-            color='Genero', 
+            df_strip, x='Marca', y='Precio', color='Genero', 
             hover_data=['Titulo', 'Vendidos'],
-            title="Detalle de Puntos por Marca (Strip Plot)",
+            title="Detalle de Puntos por Marca",
             stripmode='overlay'
         )
-        fig_strip.update_layout(height=500) # Un poco más alto para ver mejor
+        fig_strip.update_layout(height=500)
         fig_strip.update_traces(marker=dict(size=5, opacity=0.6))
-        
         st.plotly_chart(fig_strip, use_container_width=True)
     else:
         st.warning("Selecciona marcas para visualizar los puntos.")
 
+# PESTAÑA 3: VIOLIN PLOT (NUEVO)
+with tab3:
+    st.markdown("**Densidad de Precios por Género (Violín)**")
+    
+    # Filtramos extremos para ver mejor la forma
+    df_violin = df_global[df_global['Precio'] < 300]
+    
+    if not df_violin.empty:
+        # GRÁFICO 5: VIOLIN PLOT
+        fig_violin = px.violin(
+            df_violin, y="Precio", x="Genero", color="Genero",
+            box=True, points="all",
+            hover_data=['Marca', 'Titulo'],
+            title="Densidad de Precios: Hombres vs Mujeres"
+        )
+        fig_violin.update_layout(yaxis_title="Precio ($)")
+        st.plotly_chart(fig_violin, use_container_width=True)
+        st.caption("Nota: Se han filtrado productos > $300 para mejorar la visualización.")
+    else:
+        st.warning("No hay suficientes datos para generar el gráfico.")
+
 # --- DATOS FINALES ---
 with st.expander("Ver Base de Datos Completa"):
     st.dataframe(df_global)
-
