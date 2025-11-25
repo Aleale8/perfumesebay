@@ -105,9 +105,7 @@ with st.container():
             </p>
         </div>
         """, unsafe_allow_html=True)
-    st.markdown("---") # Línea separadora
-     
-    
+    st.markdown("---")# Línea separadora
     # KPIs / Métricas
     kpi1, kpi2, kpi3, kpi4 = st.columns(4)
     kpi1.metric("Total Productos", df_global.shape[0])
