@@ -4,8 +4,9 @@
    ================================================================= */
 
 /* 1. FONDO DE PÁGINA COMPLETA (ROSA PÁLIDO) */
-/* El selector 'root' afecta el fondo de toda la aplicación */
-:root {
+/* 1. FONDO DE PÁGINA COMPLETA (ROSA PÁLIDO) - Selector forzado */
+.main { /* Este selector cubre el contenedor principal */
+    background-color: #FFF0F5 !important; 
     --primary-color: #FF69B4; /* Rosa Chicle para botones/énfasis */
     --background-color: #FFF0F5; /* Rosa Pálido/Lavanda Blush */
     --secondary-background-color: #F8F8FF; /* Blanco Fantasma (más limpio para bloques) */
