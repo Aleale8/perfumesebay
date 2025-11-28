@@ -2,9 +2,16 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 
+# --- AÑADIR CÓDIGO PARA CARGAR CSS ---
+def cargar_css(file_name):
+    with open(file_name) as f:
+        st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+
+cargar_css('estilo.css')
+# -------------------------------------
+
 # --- 1. CONFIGURACIÓN Y CARGA DE DATOS ---
 st.set_page_config(page_title="Perfumes eBay - Proyecto Final", layout="wide")
-
 @st.cache_data
 def cargar_datos():
     try:
