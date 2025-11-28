@@ -1,0 +1,18 @@
+[theme]
+# Colores del tema personalizado para un look más suave
+
+#Color de Fondo Principal de la Página
+# Aquí usamos 'Lavender Blush' (#FFF0F5) para un fondo rosa muy suave.
+backgroundColor="#FFF0F5"
+
+#Color de Fondo de la Barra Lateral y Contenedores (como la expander)
+secondaryBackgroundColor="#E6E6FA" 
+
+#Color Primario (para botones, sliders, etc.)
+primaryColor="#FF69B4" 
+
+#Color del Texto
+textColor="#333333"
+
+#Puedes añadir una fuente si quieres
+font="sans-serif"
