@@ -1,0 +1,60 @@
+/* =================================================================
+   Archivo: estilo.css
+   Estilos de Dashboard Profesional con Toques Rosas
+   ================================================================= */
+
+/* 1. FONDO DE PÁGINA COMPLETA (ROSA PÁLIDO) */
+/* El selector 'root' afecta el fondo de toda la aplicación */
+:root {
+    --primary-color: #FF69B4; /* Rosa Chicle para botones/énfasis */
+    --background-color: #FFF0F5; /* Rosa Pálido/Lavanda Blush */
+    --secondary-background-color: #F8F8FF; /* Blanco Fantasma (más limpio para bloques) */
+    --text-color: #333333;
+}
+
+/* Aplicar el color de fondo a la página principal */
+.stApp {
+    background-color: var(--background-color);
+}
+
+/* 2. BARRA LATERAL (SIDEBAR) - IMAGEN DE FONDO */
+/* Este selector se enfoca en el contenedor principal de la sidebar */
+/* NOTA: Los selectores de Streamlit pueden cambiar, estos son los más comunes. */
+.st-emotion-cache-1ldf0s3, /* Contenedor de la Sidebar */
+.st-emotion-cache-1y4qm3m, /* Fondo general de la Sidebar */
+.st-emotion-cache-16txto3 /* Otro selector común para la sidebar */
+{
+    /* URL de la imagen que quieres usar */
+    background-image: url("https://tse3.mm.bing.net/th/id/OIP.7t6GgQ0vMAYi-tPSBzpuZQHaE8?pid=Api&P=0&h=180");
+    background-size: cover; /* Asegura que la imagen cubra toda la sidebar */
+    background-position: center; /* Centra la imagen */
+    background-repeat: no-repeat;
+    /* Aplicamos un filtro de transparencia o color para que el texto sea legible */
+    background-blend-mode: overlay; 
+    background-color: rgba(255, 255, 255, 0.4); /* Capa blanca semi-transparente sobre la imagen */
+}
+
+/* 3. MEJORAR LA LEGIBILIDAD DEL TEXTO EN LA BARRA LATERAL */
+/* Aseguramos un buen contraste sobre la imagen de fondo */
+.st-emotion-cache-1y4qm3m * { /* Aplica a todos los elementos dentro de la sidebar */
+    color: #1a1a1a !important; /* Color de texto oscuro para el contraste */
+    text-shadow: 0px 0px 3px rgba(255, 255, 255, 0.9); /* Sombra blanca ligera para resaltar */
+}
+
+/* Hacemos que los widgets internos sean transparentes para ver la imagen */
+.st-emotion-cache-1eql9uw, /* Radio Button Container */
+.st-emotion-cache-h5gxs9, /* Selectbox Container */
+.st-emotion-cache-un8qmt  /* Multiselect Container */
+{
+    background-color: transparent !important;
+}
+
+/* 4. ESTILO PROFESIONAL - KPIs Y CONTENEDORES */
+/* Añade un borde sutil a los contenedores principales para un look de dashboard */
+.st-emotion-cache-1gsv4e8, /* Contenedor de las columnas */
+.st-emotion-cache-nahz7x { /* Contenedor de métricas (KPIs) */
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.05); /* Sombra suave */
+    background-color: var(--secondary-background-color); /* Fondo limpio */
+}
