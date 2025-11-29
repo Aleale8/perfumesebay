@@ -1,0 +1,10 @@
+[theme]
+# Colores base muy claros (blanco/rosa pálido) para anular el negro/morado
+# Esto se aplica a los fondos secundarios (sidebar, bloques de código, etc.)
+backgroundColor="#FFFFFF"
+secondaryBackgroundColor="#F8F8FF"  # Blanco Fantasma (Muy claro para la sidebar)
+primaryColor="#FFC3A0"             # Rosa Suave (Afecta el color de acento, botones)
+font="sans serif"
+
+# Esto asegura que el tema predeterminado sea CLARO
+base="light"
