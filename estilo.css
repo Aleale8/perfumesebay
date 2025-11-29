@@ -5,18 +5,16 @@
 
 /* 1. FONDO DE PÁGINA COMPLETA (CONTENIDO PRINCIPAL) */
 .stApp {
-    /* ------------------------------------------------------------------- */
     background-image: url("https://images.pexels.com/photos/6331028/pexels-photo-6331028.jpeg?_gl=1*3d56dw*_ga*NjY1ODU4NDkuMTc2NDM3NTQ0Nw..*_ga_8JE65Q40S6*czE3NjQzNzU0NDckbzEkZzEkdDE3NjQzNzU3NDYkajUkbDAkaDA.");
     background-size: cover; 
     background-position: center; 
     background-repeat: no-repeat;
     background-attachment: fixed;
-    
-    /* ¡ELIMINAMOS EL ACLARAMIENTO! (background-blend-mode y background-color) */
-    background-color: transparent !important; /* Aseguramos que no haya fondo sólido */
-    /* ------------------------------------------------------------------- */
-}
 
+    /* REINTRODUCIMOS EL ACLARAMIENTO SUTIL (0.4) */
+    background-blend-mode: overlay; 
+    background-color: rgba(255, 255, 255, 0.4) !important; /* Capa blanca sutil */
+}
 /* 2. BARRA LATERAL (SIDEBAR) - IMAGEN DE FONDO */
 /* Selector de Sidebar: .st-emotion-cache-1hfp9j8 */
 .st-emotion-cache-1hfp9j8 
