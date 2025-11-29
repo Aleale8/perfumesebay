@@ -121,7 +121,7 @@ div[data-testid="stSidebarUserContent"] div[data-testid="stHeading"] {
 /* Combinamos data-testid="stHeading" con el selector de caché interno. */
 div[data-testid="stHeading"] .st-emotion-cache-3uj0rx { 
     /* --- APLICAMOS IMAGEN DE FONDO SÓLO AL TÍTULO H3 --- */
-    background-image: url("https://images.pexels.com/photos/1760410/pexels-photo-1760410.jpeg"); /* <-- URL de tu imagen de título */
+    background-image: url("https://i.pinimg.com/736x/8a/f4/01/8af4011ca82fa54d28d089aab8f4ba53.jpg"); /* <-- URL de tu imagen de título */
     background-size: cover; 
     background-position: center; 
     background-repeat: no-repeat;
