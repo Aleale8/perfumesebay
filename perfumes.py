@@ -205,7 +205,7 @@ with tab2:
             hover_data=['Titulo', 'Vendidos'],
             title="Detalle de Puntos por Marca",
             stripmode='overlay',
-            color_discrete_map={'Hombre':'#A0C4FF', 'Mujer':'#FFADAD'},
+            color_discrete_map={'Hombre':'#A0C4FF', 'Mujer':'#E49AC2'},
          template='plotly_white'
         )
         fig_strip.update_layout(height=500)
@@ -228,7 +228,7 @@ with tab3:
             box=True, points="all",
             hover_data=['Marca', 'Titulo'],
             title="Densidad de Precios: Hombres vs Mujeres",
-            color_discrete_map={'Hombre':'#A0C4FF', 'Mujer':'#FFADAD'},
+            color_discrete_map={'Hombre':'#ADC6D1', 'Mujer':'#FFADAD'},
     template='plotly_white'
 )
         fig_violin.update_layout(yaxis_title="Precio ($)")
