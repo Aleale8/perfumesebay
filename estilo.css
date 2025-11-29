@@ -155,3 +155,20 @@ div[data-testid="stHeading"] .st-emotion-cache-3uj0rx h3 {
 .stAlert p {
     color: #333333 !important; 
 }
+
+/* =================================================================
+   Punto 9: LIMPIEZA FINAL DE CONTENEDORES DE GRÁFICOS (DETRÁS DEL TÍTULO)
+   ================================================================= */
+
+/* Hacemos transparente el contenedor padre (stElementContainer) del título H3 */
+.st-emotion-cache-1vo6xi6 {
+    background-color: transparent !important;
+    padding: 0 !important; /* También quitamos el padding si lo tiene */
+    margin: 0 !important;
+}
+
+/* 2. Repetimos el arreglo para el contenedor padre de las KPIs, si fuera necesario */
+.st-emotion-cache-1gsv4e8 { /* Contenedor de columnas de KPIs */
+    background-color: transparent !important;
+    padding: 0 !important;
+}
