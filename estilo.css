@@ -164,3 +164,36 @@ div[data-testid="stHeading"] .st-emotion-cache-3uj0rx h3 {
 div[data-testid="stHeading"] {
     background-color: transparent !important;
 }
+
+/* =================================================================
+   Punto 10: ESTILO DE LA BARRA SUPERIOR (HEADER) - FINAL
+   ================================================================= */
+
+/* 1. Selector principal (La etiqueta <header> completa) */
+.st-emotion-cache-13892zc, 
+header[data-testid="stHeader"] { /* Usamos ambos selectores para máxima compatibilidad */
+    background-color: transparent !important; /* Forzamos la transparencia */
+    color: #333333 !important; /* Aseguramos que los íconos sean visibles */
+}
+
+/* 2. Selector del toolbar interno (que puede tener un fondo) */
+.stAppToolbar, 
+.st-emotion-cache-14vh5up {
+    background-color: transparent !important;
+}
+
+/* 3. Limpieza de los contenedores internos que contienen los botones */
+.st-emotion-cache-scp8yw, /* Contenedor de las acciones (Share, etc.) */
+.st-emotion-cache-1j22a0y {
+    background-color: transparent !important;
+    box-shadow: none !important; 
+}
+
+/* 4. Limpiamos los botones mismos */
+.stToolbarActions button,
+.stMainMenu button,
+.st-emotion-cache-183fv89,
+.st-emotion-cache-15b0g9l {
+    background-color: transparent !important;
+    color: #333333 !important;
+}
