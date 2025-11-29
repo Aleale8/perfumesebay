@@ -19,38 +19,24 @@
 /* =================================================================
    Punto 2: BARRA LATERAL (SIDEBAR) - IMAGEN DE FONDO
    ================================================================= */
-.st-emotion-cache-1hfp9j8 
+.st-emotion-cache-113itb1 /* <-- ¡ESTE ES EL NUEVO SELECTOR! */
 {
-    /* La imagen se aplica aquí */
+    /* Mantenemos la imagen y el filtro sutil */
     background-image: url("https://images.pexels.com/photos/965731/pexels-photo-965731.jpeg?_gl=1*ain5rh*_ga*NjY1ODU4NDkuMTc2NDM3NTQ0Nw..*_ga_8JE65Q40S6*czE3NjQzNzU0NDckbzEkZzEkdDE3NjQzNzU0NTkkajQ4JGwwJGgw");
     background-size: cover; 
     background-position: center; 
     background-repeat: no-repeat;
     
-    /* Esta capa BLANCA FUERZA la claridad y evita el color sólido */
     background-blend-mode: overlay; 
-    background-color: rgba(255, 255, 255, 0.7) !important; 
+    background-color: rgba(255, 255, 255, 0.7) !important; /* Capa blanca para legibilidad */
 }
-
 /* =================================================================
-   Punto 3: MEJORAR LA LEGIBILIDAD DEL TEXTO Y TRANSPARENCIA
+   Punto 3: MEJORAR LA LEGIBILIDAD DEL TEXTO Y TRANSPARENCIA (CRÍTICO)
    ================================================================= */
-
-/* ESTO ES LO QUE HACE QUE EL CONTENIDO NO TENGA FONDO BLANCO NI GRIS */
 div[data-testid="stSidebarContent"] {
-    background-color: transparent !important;
+    background-color: transparent !important; /* <-- ¡Esto quita el negro interno! */
 }
-
-/* También hacemos transparente el contenedor del encabezado de la sidebar */
-.st-emotion-cache-1r1cntt {
-    background-color: transparent !important;
-}
-
-/* El color del texto debe ser oscuro para contraste sobre el fondo claro */
-div[data-testid="stSidebarContent"] * {
-    color: #333333 !important; 
-    text-shadow: none !important; 
-}
+/* ... el resto de las reglas para color de texto ... */
 /* ... y el resto de los estilos de transparencia para filtros ... */
 /* 4. ESTILO PROFESIONAL - KPIs y Contenedores */
 /* Aseguramos que el fondo de estos elementos sea BLANCO (no negro/morado) */
