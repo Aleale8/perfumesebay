@@ -112,3 +112,42 @@ div[data-testid="stSidebarUserContent"] div[data-testid="stHeading"] {
 .st-emotion-cache-1215b22 { /* Selector común para la caja del gráfico */
     background-color: transparent !important;
 }
+
+/* =================================================================
+   Punto 8: ESTILO DE TÍTULOS Y TEXTOS (CON IMAGEN DE FONDO)
+   ================================================================= */
+
+/* 1. ESTILO PARA LOS TÍTULOS (Selector de Markdown Container del H3) */
+/* Selector encontrado: .st-emotion-cache-3uj0rx */
+.st-emotion-cache-3uj0rx { 
+    /* --- APLICAMOS IMAGEN DE FONDO A LOS TÍTULOS --- */
+    background-image: url("https://i.pinimg.com/1200x/f3/c9/b7/f3c9b73d6d9db19425d9ba94dadea332.jpg"); /* <-- URL de tu imagen de título */
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat;
+    background-blend-mode: overlay; 
+    background-color: rgba(255, 255, 255, 0.7) !important; /* Capa blanca semi-transparente */
+    
+    padding: 10px 15px; /* Padding para que el fondo se vea bien */
+    border-radius: 10px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08); 
+    margin-bottom: 15px; /* Separación del texto de abajo */
+}
+
+/* 2. ESTILO PARA BLOQUES DE TEXTO (Texto Informativo Azul) */
+/* Mantenemos esta regla para los st.markdowns que no son títulos */
+div[data-testid="stMarkdownContainer"]:not(.st-emotion-cache-3uj0rx) { 
+    /* --- APLICAMOS IMAGEN DE FONDO AL TEXTO DE INFORMACIÓN --- */
+    background-image: url("https://i.pinimg.com/736x/8a/f4/01/8af4011ca82fa54d28d089aab8f4ba53.jpg"); /* <-- URL de tu imagen de información */
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat;
+    background-blend-mode: overlay; 
+    background-color: rgba(255, 255, 255, 0.7) !important; 
+    
+    padding: 15px; 
+    border-radius: 10px; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); 
+    margin-top: 15px; 
+}
+/* ... (Asegúrate de mantener las reglas para el color de texto y divisores) ... */
