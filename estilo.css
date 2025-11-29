@@ -10,10 +10,9 @@
     background-position: center; 
     background-repeat: no-repeat;
     background-attachment: fixed;
-   /* Añadimos una capa blanca muy transparente para aclarar la imagen y asegurar la legibilidad del texto */
+   /* REINTRODUCIMOS EL ACLARAMIENTO SUTIL (0.4) */
     background-blend-mode: overlay; 
-    background-color: rgba(255, 255, 255, 0.95) !important; 
-    /* ------------------------------------------------------------------- */
+    background-color: rgba(255, 255, 255, 0.4) !important; /* Capa blanca sutil */
 }
 /* 2. BARRA LATERAL (SIDEBAR) - IMAGEN DE FONDO */
 /* Selector de Sidebar: .st-emotion-cache-1hfp9j8 */
