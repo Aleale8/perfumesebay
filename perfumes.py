@@ -83,16 +83,23 @@ else:
 
 # --- 3. CONTENIDO PRINCIPAL ---
 
+URL_ENCABEZADO = "https://images.pexels.com/photos/32461942/pexels-photo-32461942.jpeg?_gl=1*1gw485u*_ga*NjY1ODU4NDkuMTc2NDM3NTQ0Nw..*_ga_8JE65Q40S6*czE3NjQzNzU0NDckbzEkZzEkdDE3NjQzNzk0MjQkajEyJGwwJGgw"
+
 # Encabezado y Bienvenida
 with st.container():
-    st.markdown("""
+    st.markdown(f"""
         <div style='
-            /* --- NUEVOS ESTILOS PARA LA IMAGEN DE FONDO DEL ENCABEZADO --- */
-            background-image: url("https://images.pexels.com/photos/32461942/pexels-photo-32461942.jpeg?_gl=1*1gw485u*_ga*NjY1ODU4NDkuMTc2NDM3NTQ0Nw..*_ga_8JE65Q40S6*czE3NjQzNzU0NDckbzEkZzEkdDE3NjQzNzk0MjQkajEyJGwwJGgw"); 
+            /* --- ESTILOS PARA LA IMAGEN DE FONDO DEL ENCABEZADO --- */
+            
+            /* Usamos la variable URL_ENCABEZADO aquí */
+            background-image: url("{URL_ENCABEZADO}"); 
+            
+            background-size: cover; 
             background-position: center; 
             background-repeat: no-repeat;
-            background-blend-mode: overlay; /* Para un aclaramiento sutil */
-            background-color: rgba(255, 255, 255, 0.6); /* Capa blanca semi-transparente (0.6) */
+            background-blend-mode: overlay; 
+            
+            background-color: rgba(255, 255, 255, 0.6); 
             /* ------------------------------------------------------------- */
             
             padding: 30px; 
