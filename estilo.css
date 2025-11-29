@@ -33,22 +33,23 @@
    Punto 3: MEJORAR LA LEGIBILIDAD DEL TEXTO Y TRANSPARENCIA (CRÍTICO)
    ================================================================= */
 
-/* Selector del contenido visible (donde está el texto y los filtros) */
+/* ESTE SELECTOR ANULA EL COLOR BASE Y MUESTRA LA IMAGEN DE FONDO */
 div[data-testid="stSidebarContent"] {
     background-color: transparent !important;
 }
 
-/* Selector que arregla el color de fondo en la versión más reciente */
-.st-emotion-cache-1r1cntt {
-    background-color: transparent !important;
+/* Y el contenedor principal de la sidebar mantiene su imagen */
+.st-emotion-cache-1hfp9j8 
+{
+    /* ... la URL de tu imagen de fondo ... */
+    background-color: rgba(255, 255, 255, 0.7) !important; /* Capa blanca para legibilidad */
 }
 
-/* (El resto de las reglas del Punto 3, como el color del texto, siguen igual) */
-.st-emotion-cache-1r1cntt * {
-    color: #FFFFFF !important; /* Mantenemos el blanco por si la imagen es oscura */
+/* El color del texto debe ser oscuro para contrastar con la capa blanca de la sidebar */
+div[data-testid="stSidebarContent"] * {
+    color: #333333 !important; 
     text-shadow: none !important;
 }
-
 /* 4. ESTILO PROFESIONAL - KPIs y Contenedores */
 /* Aseguramos que el fondo de estos elementos sea BLANCO (no negro/morado) */
 .st-emotion-cache-1gsv4e8, 
