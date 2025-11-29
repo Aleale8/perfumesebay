@@ -1,6 +1,6 @@
 /* =================================================================
-   Archivo: estilo.css
-   Estilos de Dashboard Profesional con Toques Rosas y Sidebar Custom
+   Archivo: estilo.css - Diseño Final
+   Imagen de Fondo en Contenido Principal, Sidebar Separada.
    ================================================================= */
 
 /* 1. FONDO DE PÁGINA COMPLETA (CONTENIDO PRINCIPAL) */
@@ -18,33 +18,26 @@
     background-color: rgba(255, 255, 255, 0.95) !important; /* Capa blanca semi-transparente muy fuerte */
 }
 
-/* 2. BARRA LATERAL (SIDEBAR) - IMAGEN DE FONDO */
-/* Selector de Sidebar encontrado anteriormente: .st-emotion-cache-1hfp9j8 */
+/* 2. BARRA LATERAL (SIDEBAR) - LIMPIEZA */
+/* Selector de Sidebar: .st-emotion-cache-1hfp9j8 */
 .st-emotion-cache-1hfp9j8 
 {
-    /* ------------------------------------------------------------------- */
-    /* ¡AQUÍ ESTÁ LA NUEVA IMAGEN! */
-    background-image: url("https://images.pexels.com/photos/965731/pexels-photo-965731.jpeg?_gl=1*ain5rh*_ga*NjY1ODU4NDkuMTc2NDM3NTQ0Nw..*_ga_8JE65Q40S6*czE3NjQzNzU0NDckbzEkZzEkdDE3NjQzNzU0NTkkajQ4JGwwJGgw");
-    /* ------------------------------------------------------------------- */
+    /* Eliminamos la imagen de fondo anterior */
+    background-image: none; 
     
-    background-size: cover; 
-    background-position: center; 
-    background-repeat: no-repeat;
-    
-    /* Efecto para que la imagen no sea tan fuerte y el texto se lea mejor */
-    background-blend-mode: overlay; 
-    background-color: rgba(255, 255, 255, 0.5); /* Capa blanca semi-transparente sobre la imagen */
+    /* Le damos un color sólido y limpio a la sidebar (ej. Lavanda claro) */
+    background-color: #E6E6FA; 
 }
 
 /* 3. MEJORAR LA LEGIBILIDAD DEL TEXTO Y TRANSPARENCIA EN LA SIDEBAR */
-/* El resto de los selectores (para el texto y filtros) siguen siendo válidos */
+/* Aseguramos que el texto y los widgets sean legibles sobre el color sólido */
 .st-emotion-cache-1r1cntt {
     background-color: transparent !important;
 }
 
 .st-emotion-cache-1r1cntt * {
-    color: #4B0082 !important; 
-    text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.9); 
+    color: #4B0082 !important; /* Morado oscuro para contraste */
+    text-shadow: none !important; /* Eliminamos la sombra que ya no es necesaria sobre fondo sólido */
 }
 
 .stRadio, .stSelectbox, .stMultiselect {
@@ -52,10 +45,11 @@
 }
 
 /* 4. ESTILO PROFESIONAL - KPIs y Contenedores */
+/* Mantenemos los contenedores internos limpios para que contrasten con el fondo de imagen */
 .st-emotion-cache-1gsv4e8, 
 .st-emotion-cache-nahz7x { 
     padding: 15px;
     border-radius: 10px;
-    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.05); 
-    background-color: #F8F8FF; 
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1); 
+    background-color: #FFFFFF; /* Fondo Blanco Puro */
 }
