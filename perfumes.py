@@ -89,9 +89,6 @@ URL_ENCABEZADO = "https://images.pexels.com/photos/32461942/pexels-photo-3246194
 with st.container():
     st.markdown(f"""
         <div style='
-            /* --- ESTILOS PARA LA IMAGEN DE FONDO DEL ENCABEZADO --- */
-            
-            /* Usamos la variable URL_ENCABEZADO aquí */
             background-image: url("{URL_ENCABEZADO}"); 
             
             background-size: cover; 
@@ -99,16 +96,14 @@ with st.container():
             background-repeat: no-repeat;
             background-blend-mode: overlay; 
             
-            background-color: rgba(255, 255, 255, 0.6); 
-            /* ------------------------------------------------------------- */
-            
+            background-color: rgba(255, 255, 255, 0.6);
             padding: 30px; 
             border-radius: 15px; 
             border: 2px solid #E6E6FA;
             box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
         '>
             <h1 style='text-align: center; color: #6F4E37; font-family: Georgia, serif; font-size: 2.5em;'>
-                ✨ Análisis de Mercado de Perfumes eBay 💖
+                ✨ Análisis de Mercado de Perfumes eBay 
             </h1>
             <p style='text-align: center; font-size: 1.2em; color: #333333; font-family: Georgia, serif; margin-top: 10px;'>
                 Bienvenido a la herramienta de visualización interactiva. Utiliza los filtros de la izquierda para explorar datos de perfumes de hombre y mujer. 🐰
