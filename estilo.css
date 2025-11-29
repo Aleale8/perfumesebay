@@ -92,7 +92,7 @@ div[data-testid="stSidebarUserContent"] div[data-testid="stHeading"] {
 /* 1. Aplicamos la imagen al contenedor principal de los gráficos Streamlit */
 .stPlotlyChart {
     /* Aquí aplicamos la imagen de fondo deseada */
-    background-image: url("https://images.pexels.com/photos/1760410/pexels-photo-1760410.jpeg"); /* <-- ¡CAMBIA ESTA URL por tu imagen sutil! */
+    background-image: url("https://i.pinimg.com/736x/c3/b6/01/c3b601dc5fae9711436006660d4e0617.jpg"); /* <-- ¡CAMBIA ESTA URL por tu imagen sutil! */
     background-size: cover;
     background-position: center;
     border-radius: 10px; /* Borde suave */
