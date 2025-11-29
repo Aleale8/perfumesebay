@@ -3,14 +3,19 @@
    Estilos de Dashboard Profesional con Toques Rosas y Sidebar Custom
    ================================================================= */
 
-/* 1. FONDO DE PÁGINA COMPLETA (ROSA PÁLIDO) */
-:root {
-    --background-color: #FFF0F5; /* Rosa Pálido/Lavanda Blush */
-}
+/* 1. FONDO DE PÁGINA COMPLETA (CONTENIDO PRINCIPAL) */
 
-/* Aplicar el color de fondo a la página principal de manera forzada */
+/* URL de la imagen para el fondo de la página */
 .main {
-    background-color: var(--background-color) !important;
+    background-image: url("https://images.pexels.com/photos/6331028/pexels-photo-6331028.jpeg?_gl=1*3d56dw*_ga*NjY1ODU4NDkuMTc2NDM3NTQ0Nw..*_ga_8JE65Q40S6*czE3NjQzNzU0NDckbzEkZzEkdDE3NjQzNzU3NDYkajUkbDAkaDA.");
+    background-size: cover; /* Cubrir toda el área */
+    background-position: center; /* Centrar la imagen */
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* Opcional: fija la imagen al hacer scroll */
+    
+    /* Nota: Usamos un filtro blanco para aclarar la imagen y mejorar la legibilidad del texto */
+    background-blend-mode: overlay; 
+    background-color: rgba(255, 255, 255, 0.95) !important; /* Capa blanca semi-transparente muy fuerte */
 }
 
 /* 2. BARRA LATERAL (SIDEBAR) - IMAGEN DE FONDO */
