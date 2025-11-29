@@ -84,3 +84,22 @@ div[data-testid="stSidebarUserContent"] div[data-testid="stHeading"] {
 .st-emotion-cache-1fwbbrh {
     background-color: transparent !important;
 }
+
+/* =================================================================
+   Punto 7: ESTILO DE LA BARRA SUPERIOR (TOOLBAR)
+   ================================================================= */
+
+/* Selector de la barra de herramientas superior: .stAppToolbar */
+.st-emotion-cache-14vh5up {
+    /* 1. Fondo de la barra: Hacemos que sea transparente para que se vea el fondo de la página */
+    background-color: transparent !important; 
+    
+    /* 2. Opcional: Si quieres un color sólido sutil (ej. rosa pálido #F8F8FF) */
+    /* background-color: #F8F8FF !important; */
+
+    /* 3. Opcional: Ajustar el borde (si lo tiene) */
+    border-bottom: 1px solid #D3D3D3; /* Borde inferior sutil */
+    
+    /* 4. Aseguramos que los íconos (Share, Menú) sean visibles */
+    color: #333333 !important; 
+}
