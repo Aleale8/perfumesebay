@@ -69,22 +69,18 @@ div[data-testid="stSidebarContent"] {
    Punto 6: LIMPIEZA FINAL DE LA SIDEBAR (QUITAR FONDO DE TÍTULO)
    ================================================================= */
 
-/* 1. Selector que apunta al contenedor del título H1 de la Sidebar */
-div[data-testid="stSidebarUserContent"] div[data-testid="stHeading"] > div {
-    background-color: transparent !important;
-    padding: 0 !important; /* También quitamos el padding si lo tiene */
-}
-
-/* 2. Selector del contenedor de texto Markdown que envuelve el título */
-/* Esto asegura que la capa más interna también sea transparente */
-.st-emotion-cache-1fwbbrh, /* Es un selector común para el markdown en la sidebar */
-.st-emotion-cache-106khsh { /* Contenedor de la etiqueta 'Género:' */
-    background-color: transparent !important;
-}
-
-/* 3. Aseguramos que el contenedor de todos los elementos (VerticalBlock) sea transparente */
-/* Esto arregla el recuadro blanco que envuelve el título principal */
-div[data-testid="stSidebarUserContent"] div[data-testid="stVerticalBlock"] > div:first-child {
+/* ESTE SELECTOR APUNTA A LA "CAJITA BLANCA" QUE CONTIENE EL H1 */
+div[data-testid="stSidebarUserContent"] div[data-testid="stElementContainer"] {
     background-color: transparent !important;
     padding: 0 !important;
+}
+
+/* 2. Aseguramos que el contenedor del encabezado (stHeading) también sea transparente */
+div[data-testid="stSidebarUserContent"] div[data-testid="stHeading"] {
+    background-color: transparent !important;
+}
+
+/* El contenedor más interno (stMarkdownContainer) ya debería ser transparente, pero lo forzamos */
+.st-emotion-cache-1fwbbrh {
+    background-color: transparent !important;
 }
