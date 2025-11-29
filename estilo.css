@@ -3,18 +3,21 @@
    Estilos de Dashboard Profesional con Toques Rosas y Sidebar Custom
    ================================================================= */
 
-/* 1. FONDO DE PÁGINA COMPLETA (CONTENIDO PRINCIPAL) */
-/* Usamos el selector .main para aplicar la imagen solo al área de contenido */
-.main {
+/* =================================================================
+   Punto 1: FONDO DE PÁGINA COMPLETA (CONTENIDO PRINCIPAL)
+   ================================================================= */
+
+/* Aplicamos la imagen al contenedor principal de toda la app (.stApp) */
+.stApp {
     /* ------------------------------------------------------------------- */
     /* ¡NUEVA IMAGEN DE FONDO PARA EL CONTENIDO PRINCIPAL! */
     background-image: url("https://images.pexels.com/photos/6331028/pexels-photo-6331028.jpeg?_gl=1*3d56dw*_ga*NjY1ODU4NDkuMTc2NDM3NTQ0Nw..*_ga_8JE65Q40S6*czE3NjQzNzU0NDckbzEkZzEkdDE3NjQzNzU3NDYkajUkbDAkaDA.");
     background-size: cover; 
     background-position: center; 
     background-repeat: no-repeat;
-    background-attachment: fixed; /* Mantiene la imagen fija al hacer scroll */
+    background-attachment: fixed;
     
-    /* Añadimos una capa blanca muy transparente para aclarar la imagen y asegurar la legibilidad del texto */
+    /* Capa de color para aclarar la imagen y mejorar la legibilidad */
     background-blend-mode: overlay; 
     background-color: rgba(255, 255, 255, 0.95) !important; 
     /* ------------------------------------------------------------------- */
