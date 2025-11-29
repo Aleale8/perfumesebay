@@ -116,7 +116,6 @@ with col_pie2:
             df_global, 
             names='Genero', 
             title='Distribución por Género',
-            font=dict(family="Georgia, serif", size=20, color="#333333"),
             color='Genero',
             color_discrete_map={'Hombre':'#ADC6D1', 'Mujer':'#E49AC2'},
             hole=0.4,
