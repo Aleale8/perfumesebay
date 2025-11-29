@@ -29,20 +29,24 @@
     background-color: rgba(255, 255, 255, 0.7) !important; 
 }
 
-/* 3. MEJORAR LA LEGIBILIDAD DEL TEXTO Y TRANSPARENCIA EN LA SIDEBAR */
+/* =================================================================
+   Punto 3: MEJORAR LA LEGIBILIDAD DEL TEXTO Y TRANSPARENCIA (CRÍTICO)
+   ================================================================= */
+
+/* Selector del contenido visible (donde está el texto y los filtros) */
+div[data-testid="stSidebarContent"] {
+    background-color: transparent !important;
+}
+
+/* Selector que arregla el color de fondo en la versión más reciente */
 .st-emotion-cache-1r1cntt {
     background-color: transparent !important;
 }
 
-/* FORZAMOS EL TEXTO OSCURO (#333333) EN LA SIDEBAR */
-.st-emotion-cache-1r1cntt *,
-div[data-testid="stSidebarHeader"] h1 {
-    color: #333333 !important; 
-    text-shadow: none !important; 
-}
-
-.stRadio, .stSelectbox, .stMultiselect {
-    background-color: transparent !important;
+/* (El resto de las reglas del Punto 3, como el color del texto, siguen igual) */
+.st-emotion-cache-1r1cntt * {
+    color: #FFFFFF !important; /* Mantenemos el blanco por si la imagen es oscura */
+    text-shadow: none !important;
 }
 
 /* 4. ESTILO PROFESIONAL - KPIs y Contenedores */
