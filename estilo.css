@@ -5,7 +5,7 @@
 
 /* 1. FONDO DE PÁGINA COMPLETA (CONTENIDO PRINCIPAL) */
 .stApp {
-    background-image: url("https://images.pexels.com/photos/8361520/pexels-photo-8361520.jpeg?_gl=1*1sh9nly*_ga*NjY1ODU4NDkuMTc2NDM3NTQ0Nw..*_ga_8JE65Q40S6*czE3NjQzNzU0NDckbzEkZzEkdDE3NjQzNzY2MzgkajQ2JGwwJGgw.");
+    background-image: url("https://images.pexels.com/photos/7078033/pexels-photo-7078033.jpeg?_gl=1*mn8vms*_ga*NjY1ODU4NDkuMTc2NDM3NTQ0Nw..*_ga_8JE65Q40S6*czE3NjQzNzU0NDckbzEkZzEkdDE3NjQzNzY0MzgkajU5JGwwJGgw.");
     background-size: cover; 
     background-position: center; 
     background-repeat: no-repeat;
@@ -21,7 +21,7 @@
 {
     /* ------------------------------------------------------------------- */
     /* ¡IMAGEN EN SIDEBAR MANTENIDA! */
-    background-image: url("https://images.pexels.com/photos/965731/pexels-photo-965731.jpeg?_gl=1*ain5rh*_ga*NjY1ODU4NDkuMTc2NDM3NTQ0Nw..*_ga_8JE65Q40S6*czE3NjQzNzU0NDckbzEkZzEkdDE3NjQzNzU0NTkkajQ4JGwwJGgw");
+    background-image: url("https://images.pexels.com/photos/8361520/pexels-photo-8361520.jpeg?_gl=1*1sh9nly*_ga*NjY1ODU4NDkuMTc2NDM3NTQ0Nw..*_ga_8JE65Q40S6*czE3NjQzNzU0NDckbzEkZzEkdDE3NjQzNzY2MzgkajQ2JGwwJGgw");
     /* ------------------------------------------------------------------- */
     
     background-size: cover; 
