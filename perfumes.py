@@ -180,8 +180,10 @@ with tab1:
         fig_box = px.box(
             df_comp, x='Marca', y='Precio', color='Marca', 
             points="outliers", 
-            title="Distribución de Precios (Box Plot)"
-        )
+            title="Distribución de Precios (Box Plot)",
+            color_discrete_sequence=px.colors.qualitative.Pastel,
+    template='plotly_white'
+)
         st.plotly_chart(fig_box, use_container_width=True)
     else:
         st.info("Selecciona al menos una marca para comparar.")
