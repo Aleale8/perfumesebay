@@ -117,7 +117,7 @@ with col_pie2:
             names='Genero', 
             title='Distribución por Género',
             color='Genero',
-            color_discrete_map={'Hombre':'#3366CC', 'Mujer':'#FF66B2'},
+            color_discrete_map={'Hombre':'#ADC6D1', 'Mujer':'#E49AC2'},
             hole=0.4,
             template='plotly_white' # <-- 1. Usar un template claro
         )
