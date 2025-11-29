@@ -81,37 +81,17 @@ else:
     df_global = df
 
 
-# --- 3. CONTENIDO PRINCIPAL ---
-
-URL_ENCABEZADO = "https://images.pexels.com/photos/32461942/pexels-photo-32461942.jpeg?_gl=1*1gw485u*_ga*NjY1ODU4NDkuMTc2NDM3NTQ0Nw..*_ga_8JE65Q40S6*czE3NjQzNzU0NDckbzEkZzEkdDE3NjQzNzk0MjQkajEyJGwwJGgw"
-
 # Encabezado y Bienvenida
-with st.container():
-    st.markdown(f"""
-        <div style='
-            background-image: url("{URL_ENCABEZADO}"); 
-            
-            background-size: cover; 
-            background-position: center; 
-            background-repeat: no-repeat;
-            background-blend-mode: overlay; 
-            
-            background-color: rgba(255, 255, 255, 0.6);
-            padding: 30px; 
-            border-radius: 15px; 
-            border: 2px solid #E6E6FA;
-            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
-        '>
-            <h1 style='text-align: center; color: #6F4E37; font-family: Georgia, serif; font-size: 2.5em;'>
-                ✨ Análisis de Mercado de Perfumes eBay 
-            </h1>
-            <p style='text-align: center; font-size: 1.2em; color: #333333; font-family: Georgia, serif; margin-top: 10px;'>
-                Bienvenido a la herramienta de visualización interactiva. Utiliza los filtros de la izquierda para explorar datos de perfumes de hombre y mujer. 🐰
-            </p>
-        </div>
-        """, unsafe_allow_html=True)
-    
-    st.markdown("---")
+st.markdown("""
+    <h1 style='text-align: center; color: #6F4E37; font-family: Georgia, serif; font-size: 2.5em;'>
+        ✨ Análisis de Mercado de Perfumes eBay
+    </h1>
+    <p style='text-align: center; font-size: 1.2em; color: #333333; font-family: Georgia, serif; margin-top: 10px;'>
+        Bienvenido a la herramienta de visualización interactiva. Utiliza los filtros de la izquierda para explorar datos de perfumes de hombre y mujer. 🐰
+    </p>
+    """, unsafe_allow_html=True)
+
+st.markdown("---") # Mantenemos el divisor simple para separar
 
     # KPIs / Métricas
     kpi1, kpi2, kpi3, kpi4 = st.columns(4)
