@@ -100,7 +100,7 @@ kpi2.metric("Precio Promedio", f"${df_global['Precio'].mean():.2f}")
 kpi3.metric("Total Ventas", f"{df_global['Vendidos'].sum():,.0f}")
 kpi4.metric("Marcas Registradas", df_global['Marca'].nunique())
     
-    st.divider()
+st.divider()
 
 # --- SECCIÓN GRÁFICA 1: TORTA (PIE CHART) ---
 st.subheader("1. Composición del Mercado")
