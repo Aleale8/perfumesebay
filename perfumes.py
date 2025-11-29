@@ -116,12 +116,13 @@ with col_pie2:
             df_global, 
             names='Genero', 
             title='Distribución por Género',
+            font=dict(family="Georgia, serif", size=20, color="#333333"),
             color='Genero',
             color_discrete_map={'Hombre':'#ADC6D1', 'Mujer':'#E49AC2'},
             hole=0.4,
             template='plotly_white' # <-- 1. Usar un template claro
         )
-        # 2. HACER EL FONDO DEL GRÁFICO TRANSPARENTE (CRÍTICO)
+        #HACER EL FONDO DEL GRÁFICO TRANSPARENTE
         fig_pie.update_layout(
             paper_bgcolor='rgba(0,0,0,0)', # Fondo de la hoja (fuera del gráfico)
             plot_bgcolor='rgba(0,0,0,0)',  # Fondo del lienzo (área de dibujo)
