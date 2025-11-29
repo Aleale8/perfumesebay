@@ -125,7 +125,7 @@ with col_pie2:
         fig_pie.update_layout(
             paper_bgcolor='rgba(0,0,0,0)', # Fondo de la hoja (fuera del gráfico)
             plot_bgcolor='rgba(0,0,0,0)',  # Fondo del lienzo (área de dibujo)
-            font=dict(color='#333333')     # Asegurar que el texto sea oscuro
+            font=dict(family="Georgia, serif", size=20, color="#333333")     # Asegurar que el texto sea oscuro
         )
         st.plotly_chart(fig_pie, use_container_width=True)
     else:
