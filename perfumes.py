@@ -149,7 +149,7 @@ with col_bar2:
         data_ventas = df_global.groupby('Marca')['Vendidos'].sum().sort_values(ascending=False).head(10).reset_index()
         fig_bar = px.bar(
             data_ventas, x='Marca', y='Vendidos', color='Vendidos', 
-            title="Top 10 Marcas Más Vendidas", color_continuous_scale='Viridis'
+            title="Top 10 Marcas Más Vendidas", color_continuous_scale='Teal'
         )
     else:
         data_ventas = df_global[df_global['Marca'] == marca_ventas].sort_values('Vendidos', ascending=False).head(10)
@@ -166,7 +166,7 @@ st.divider()
 st.subheader("3. Análisis Detallado de Precios")
 
 # Definimos 3 pestañas: Cajas, Puntos y Violín
-tab1, tab2, tab3 = st.tabs(["📊 Comparador (Cajas)", "📍 Distribución (Puntos)", "🎻 Densidad (Violín)"])
+tab1, tab2, tab3 = st.tabs(["📊 Comparador (Cajas)", "📍 Distribución (Puntos)", " Densidad (Violín)"])
 
 # PESTAÑA 1: BOX PLOT
 with tab1:
