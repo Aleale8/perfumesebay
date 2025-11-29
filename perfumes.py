@@ -66,7 +66,7 @@ else:
 
 
 # --- 2. BARRA LATERAL (FILTROS) ---
-st.sidebar.title("🔍 Panel de Control")
+st.sidebar.title("Cámara de Esencias 🌸")
 st.sidebar.markdown("Filtros globales para el análisis.")
 
 # Filtro de Género
