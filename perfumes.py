@@ -227,8 +227,10 @@ with tab3:
             df_violin, y="Precio", x="Genero", color="Genero",
             box=True, points="all",
             hover_data=['Marca', 'Titulo'],
-            title="Densidad de Precios: Hombres vs Mujeres"
-        )
+            title="Densidad de Precios: Hombres vs Mujeres",
+            color_discrete_map={'Hombre':'#A0C4FF', 'Mujer':'#FFADAD'},
+    template='plotly_white'
+)
         fig_violin.update_layout(yaxis_title="Precio ($)")
         st.plotly_chart(fig_violin, use_container_width=True)
         st.caption("Nota: Se han filtrado productos > $300 para mejorar la visualización.")
