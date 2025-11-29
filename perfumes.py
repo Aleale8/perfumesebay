@@ -84,7 +84,7 @@ else:
 # Encabezado y Bienvenida
 st.markdown("""
     <h1 style='text-align: center; color: #6F4E37; font-family: Georgia, serif; font-size: 2.5em;'>
-        ✨ Análisis de Mercado de Perfumes eBay
+        🌸 Análisis de Mercado de Perfumes eBay 🌸
     </h1>
     <p style='text-align: center; font-size: 1.2em; color: #333333; font-family: Georgia, serif; margin-top: 10px;'>
         Bienvenido a la herramienta de visualización interactiva. Utiliza los filtros de la izquierda para explorar datos de perfumes de hombre y mujer. 🐰
