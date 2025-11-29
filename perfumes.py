@@ -93,12 +93,12 @@ st.markdown("""
 
 st.markdown("---") # Mantenemos el divisor simple para separar
 
-    # KPIs / Métricas
-    kpi1, kpi2, kpi3, kpi4 = st.columns(4)
-    kpi1.metric("Total Productos", df_global.shape[0])
-    kpi2.metric("Precio Promedio", f"${df_global['Precio'].mean():.2f}")
-    kpi3.metric("Total Ventas", f"{df_global['Vendidos'].sum():,.0f}")
-    kpi4.metric("Marcas Registradas", df_global['Marca'].nunique())
+# KPIs / Métricas
+kpi1, kpi2, kpi3, kpi4 = st.columns(4)
+kpi1.metric("Total Productos", df_global.shape[0])
+kpi2.metric("Precio Promedio", f"${df_global['Precio'].mean():.2f}")
+kpi3.metric("Total Ventas", f"{df_global['Vendidos'].sum():,.0f}")
+kpi4.metric("Marcas Registradas", df_global['Marca'].nunique())
     
     st.divider()
 
