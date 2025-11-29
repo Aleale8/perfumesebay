@@ -204,7 +204,7 @@ with tab2:
             df_strip, x='Marca', y='Precio', color='Genero', 
             hover_data=['Titulo', 'Vendidos'],
             title="Detalle de Puntos por Marca",
-            stripmode='overlay'
+            stripmode='overlay',
             color_discrete_map={'Hombre':'#A0C4FF', 'Mujer':'#FFADAD'},
          template='plotly_white'
         )
