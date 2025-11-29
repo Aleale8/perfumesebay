@@ -10,7 +10,10 @@
     background-position: center; 
     background-repeat: no-repeat;
     background-attachment: fixed;
-
+   /* Añadimos una capa blanca muy transparente para aclarar la imagen y asegurar la legibilidad del texto */
+    background-blend-mode: overlay; 
+    background-color: rgba(255, 255, 255, 0.95) !important; 
+    /* ------------------------------------------------------------------- */
 }
 /* 2. BARRA LATERAL (SIDEBAR) - IMAGEN DE FONDO */
 /* Selector de Sidebar: .st-emotion-cache-1hfp9j8 */
