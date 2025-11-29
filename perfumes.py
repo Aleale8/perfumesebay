@@ -119,6 +119,13 @@ with col_pie2:
             color='Genero',
             color_discrete_map={'Hombre':'#3366CC', 'Mujer':'#FF66B2'},
             hole=0.4
+            template='plotly_white' # <-- 1. Usar un template claro
+        )
+        # 2. HACER EL FONDO DEL GRÁFICO TRANSPARENTE (CRÍTICO)
+        fig_pie.update_layout(
+            paper_bgcolor='rgba(0,0,0,0)', # Fondo de la hoja (fuera del gráfico)
+            plot_bgcolor='rgba(0,0,0,0)',  # Fondo del lienzo (área de dibujo)
+            font=dict(color='#333333')     # Asegurar que el texto sea oscuro
         )
         st.plotly_chart(fig_pie, use_container_width=True)
     else:
