@@ -1,47 +1,44 @@
 /* =================================================================
-   Archivo: estilo.css
-   Estilos de Dashboard Profesional con Toques Rosas y Sidebar Custom
+   Archivo: estilo.css - Diseño CLARO Y LIMPIO (SIN COLORES OSCUROS)
    ================================================================= */
 
 /* 1. FONDO DE PÁGINA COMPLETA (CONTENIDO PRINCIPAL) */
 .stApp {
-    background-image: url("https://images.pexels.com/photos/4712000/pexels-photo-4712000.jpeg?_gl=1*u0cpqr*_ga*NjY1ODU4NDkuMTc2NDM3NTQ0Nw..*_ga_8JE65Q40S6*czE3NjQzNzU0NDckbzEkZzEkdDE3NjQzNzc0NzMkajQ4JGwwJGgw.");
+    background-image: url("https://images.pexels.com/photos/6331028/pexels-photo-6331028.jpeg?_gl=1*3d56dw*_ga*NjY1ODU4NDkuMTc2NDM3NTQ0Nw..*_ga_8JE65Q40S6*czE3NjQzNzU0NDckbzEkZzEkdDE3NjQzNzU3NDYkajUkbDAkaDA.");
     background-size: cover; 
     background-position: center; 
     background-repeat: no-repeat;
     background-attachment: fixed;
-   /* REINTRODUCIMOS EL ACLARAMIENTO SUTIL (0.4) */
+    
+    /* Aclaramiento sutil para la imagen de fondo */
     background-blend-mode: overlay; 
-    background-color: rgba(255, 255, 255, 0.4) !important; /* Capa blanca sutil */
+    background-color: rgba(255, 255, 255, 0.4) !important; 
 }
-/* 2. BARRA LATERAL (SIDEBAR) - IMAGEN DE FONDO */
-/* Selector de Sidebar: .st-emotion-cache-1hfp9j8 */
+
+
+/* 2. BARRA LATERAL (SIDEBAR) - IMAGEN DE FONDO CLARO */
 .st-emotion-cache-1hfp9j8 
 {
-    /* ------------------------------------------------------------------- */
-    /* ¡IMAGEN EN SIDEBAR MANTENIDA! */
-    background-image: url("https://images.pexels.com/photos/8361520/pexels-photo-8361520.jpeg?_gl=1*1sh9nly*_ga*NjY1ODU4NDkuMTc2NDM3NTQ0Nw..*_ga_8JE65Q40S6*czE3NjQzNzU0NDckbzEkZzEkdDE3NjQzNzY2MzgkajQ2JGwwJGgw");
-    /* ------------------------------------------------------------------- */
-    
+    background-image: url("https://images.pexels.com/photos/965731/pexels-photo-965731.jpeg?_gl=1*ain5rh*_ga*NjY1ODU4NDkuMTc2NDM3NTQ0Nw..*_ga_8JE65Q40S6*czE3NjQzNzU0NDckbzEkZzEkdDE3NjQzNzU0NTkkajQ4JGwwJGgw");
     background-size: cover; 
     background-position: center; 
     background-repeat: no-repeat;
     
-    /* Efecto para que la imagen no sea tan fuerte y el texto se lea mejor */
+    /* Capa blanca más fuerte para legibilidad */
     background-blend-mode: overlay; 
-    background-color: rgba(255, 255, 255, 0.5); /* Capa blanca semi-transparente sobre la imagen */
+    background-color: rgba(255, 255, 255, 0.7) !important; 
 }
 
 /* 3. MEJORAR LA LEGIBILIDAD DEL TEXTO Y TRANSPARENCIA EN LA SIDEBAR */
-
-/* El resto de los selectores (para el texto y filtros) siguen siendo válidos */
 .st-emotion-cache-1r1cntt {
     background-color: transparent !important;
 }
 
-.st-emotion-cache-1r1cntt * {
-    color: #4B0082 !important; 
-    text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.9); 
+/* FORZAMOS EL TEXTO OSCURO (#333333) EN LA SIDEBAR */
+.st-emotion-cache-1r1cntt *,
+div[data-testid="stSidebarHeader"] h1 {
+    color: #333333 !important; 
+    text-shadow: none !important; 
 }
 
 .stRadio, .stSelectbox, .stMultiselect {
@@ -49,37 +46,28 @@
 }
 
 /* 4. ESTILO PROFESIONAL - KPIs y Contenedores */
-/* Aseguramos que los contenedores internos sigan un estilo limpio y profesional */
+/* Aseguramos que el fondo de estos elementos sea BLANCO (no negro/morado) */
 .st-emotion-cache-1gsv4e8, 
 .st-emotion-cache-nahz7x { 
     padding: 15px;
     border-radius: 10px;
-    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.05); 
-    background-color: #F8F8FF; /* Fondo Blanco Fantasma para contraste limpio */
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1); 
+    background-color: #FFFFFF; /* Fondo BLANCO */
 }
 
-/* =================================================================
-   Punto 5: LIMPIEZA DE COLORES POR DEFECTO (ELIMINAR MORADO)
-   ================================================================= */
-
-/* 1. Fondo de Subtítulos y Títulos (como "1. Composición del Mercado") */
+/* 5. ELIMINACIÓN DE COLORES OSCUROS EN TÍTULOS Y TEXTO */
 .stHeading {
-    /* Fondo blanco para que el título resalte */
-    background-color: #FFFFFF; 
+    background-color: #FFFFFF; /* Fondo blanco para títulos */
     padding: 5px;
     border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Sombra suave */
 }
 
-/* 2. Fondo de Bloques de Información (st.info, st.warning, st.error) */
-.stAlert, .stNotification {
-    background-color: #FFFFFF !important; /* Fondo blanco forzado */
-    border-radius: 10px;
-    border: 1px solid #FFC3A0; /* Borde suave */
-}
-
-/* 3. Fondo del Bloque del Encabezado (Para evitar cualquier conflicto de color base) */
-/* El color del texto morado también puede provenir del estilo por defecto. */
+/* Forzamos el color del texto a gris oscuro en todos los títulos */
 .stHeading > div > div > h1, .stHeading > div > div > h2, .stHeading > div > div > h3 {
-    color: #4B0082 !important; /* Asegurar un color de texto oscuro y bonito */
+    color: #333333 !important; 
+}
+
+/* Divisores claros */
+.stDivider {
+    border-top: 1px solid #D3D3D3;
 }
