@@ -86,20 +86,31 @@ div[data-testid="stSidebarUserContent"] div[data-testid="stHeading"] {
 }
 
 /* =================================================================
-   Punto 7: ESTILO DE LA BARRA SUPERIOR (TOOLBAR)
+   Punto 7: ESTILO DE LA BARRA SUPERIOR (TOOLBAR) - CRÍTICO
    ================================================================= */
 
-/* Selector de la barra de herramientas superior: .stAppToolbar */
+/* 1. Selector principal (donde se aplica el color blanco/oscuro) */
 .st-emotion-cache-14vh5up {
-    /* 1. Fondo de la barra: Hacemos que sea transparente para que se vea el fondo de la página */
-    background-color: transparent !important; 
-    
-    /* 2. Opcional: Si quieres un color sólido sutil (ej. rosa pálido #F8F8FF) */
-    /* background-color: #F8F8FF !important; */
+    background-color: transparent !important; /* Forzamos la transparencia del fondo */
+    color: #333333 !important; /* Aseguramos que los íconos sean visibles */
+}
 
-    /* 3. Opcional: Ajustar el borde (si lo tiene) */
-    border-bottom: 1px solid #D3D3D3; /* Borde inferior sutil */
-    
-    /* 4. Aseguramos que los íconos (Share, Menú) sean visibles */
-    color: #333333 !important; 
+/* 2. Limpieza del contenedor de acciones interno y del menú (¡CRÍTICO!) */
+/* Este div interno suele tener el color primario/secundario que Streamlit aplica por defecto */
+.st-emotion-cache-scp8yw, 
+.st-emotion-cache-1j22a0y {
+    background-color: transparent !important;
+    box-shadow: none !important; /* Eliminamos cualquier sombra o borde que pueda verse */
+}
+
+/* 3. Limpiamos la barra principal nuevamente con un selector de mayor prioridad */
+div[data-testid="stToolbar"] {
+    background-color: transparent !important;
+}
+
+/* 4. Forzamos los botones a ser transparentes para que el color del texto aplique */
+.stToolbarActions button,
+.stMainMenu button {
+    background-color: transparent !important;
+    color: #333333 !important;
 }
