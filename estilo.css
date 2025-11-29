@@ -86,31 +86,29 @@ div[data-testid="stSidebarUserContent"] div[data-testid="stHeading"] {
 }
 
 /* =================================================================
-   Punto 7: ESTILO DE LA BARRA SUPERIOR (TOOLBAR) - CRÍTICO
+   Punto 7: IMAGEN DE FONDO PARA GRÁFICOS PLOTLY
    ================================================================= */
 
-/* 1. Selector principal (donde se aplica el color blanco/oscuro) */
-.st-emotion-cache-14vh5up {
-    background-color: transparent !important; /* Forzamos la transparencia del fondo */
-    color: #333333 !important; /* Aseguramos que los íconos sean visibles */
+/* 1. Aplicamos la imagen al contenedor principal de los gráficos Streamlit */
+.stPlotlyChart {
+    /* Aquí aplicamos la imagen de fondo deseada */
+    background-image: url("https://images.pexels.com/photos/1760410/pexels-photo-1760410.jpeg"); /* <-- ¡CAMBIA ESTA URL por tu imagen sutil! */
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px; /* Borde suave */
+    
+    /* Le damos una capa de aclaramiento BLANCO para la legibilidad */
+    background-blend-mode: overlay;
+    background-color: rgba(255, 255, 255, 0.8) !important; /* Capa blanca fuerte para ver ejes */
 }
 
-/* 2. Limpieza del contenedor de acciones interno y del menú (¡CRÍTICO!) */
-/* Este div interno suele tener el color primario/secundario que Streamlit aplica por defecto */
-.st-emotion-cache-scp8yw, 
-.st-emotion-cache-1j22a0y {
-    background-color: transparent !important;
-    box-shadow: none !important; /* Eliminamos cualquier sombra o borde que pueda verse */
+/* 2. Forzamos el lienzo interno de Plotly a ser TRANSPARENTE */
+/* Esto es CRUCIAL para que el fondo de Streamlit (Punto 1) se vea a través del gráfico */
+.js-plotly-plot .plotly .main-svg {
+    background: transparent !important;
 }
 
-/* 3. Limpiamos la barra principal nuevamente con un selector de mayor prioridad */
-div[data-testid="stToolbar"] {
+/* 3. Aseguramos que el área de Plotly Chart (la caja que lo contiene) también sea transparente */
+.st-emotion-cache-1215b22 { /* Selector común para la caja del gráfico */
     background-color: transparent !important;
-}
-
-/* 4. Forzamos los botones a ser transparentes para que el color del texto aplique */
-.stToolbarActions button,
-.stMainMenu button {
-    background-color: transparent !important;
-    color: #333333 !important;
 }
