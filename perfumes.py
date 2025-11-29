@@ -205,6 +205,8 @@ with tab2:
             hover_data=['Titulo', 'Vendidos'],
             title="Detalle de Puntos por Marca",
             stripmode='overlay'
+            color_discrete_map={'Hombre':'#A0C4FF', 'Mujer':'#FFADAD'},
+         template='plotly_white'
         )
         fig_strip.update_layout(height=500)
         fig_strip.update_traces(marker=dict(size=5, opacity=0.6))
