@@ -87,10 +87,17 @@ else:
 with st.container():
     st.markdown("""
         <div style='
-            background-color: #FEEFEF; 
+            /* --- NUEVOS ESTILOS PARA LA IMAGEN DE FONDO DEL ENCABEZADO --- */
+            background-image: url("https://images.pexels.com/photos/32461942/pexels-photo-32461942.jpeg?_gl=1*1gw485u*_ga*NjY1ODU4NDkuMTc2NDM3NTQ0Nw..*_ga_8JE65Q40S6*czE3NjQzNzU0NDckbzEkZzEkdDE3NjQzNzk0MjQkajEyJGwwJGgw"); 
+            background-position: center; 
+            background-repeat: no-repeat;
+            background-blend-mode: overlay; /* Para un aclaramiento sutil */
+            background-color: rgba(255, 255, 255, 0.6); /* Capa blanca semi-transparente (0.6) */
+            /* ------------------------------------------------------------- */
+            
             padding: 30px; 
             border-radius: 15px; 
-            border: 2px solid #6F4E37;
+            border: 2px solid #E6E6FA;
             box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
         '>
             <h1 style='text-align: center; color: #6F4E37; font-family: Georgia, serif; font-size: 2.5em;'>
@@ -102,7 +109,7 @@ with st.container():
         </div>
         """, unsafe_allow_html=True)
     
-    st.markdown("---") 
+    st.markdown("---")
 
     # KPIs / Métricas
     kpi1, kpi2, kpi3, kpi4 = st.columns(4)
