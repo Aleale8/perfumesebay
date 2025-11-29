@@ -112,3 +112,46 @@ div[data-testid="stSidebarUserContent"] div[data-testid="stHeading"] {
 .st-emotion-cache-1215b22 { /* Selector común para la caja del gráfico */
     background-color: transparent !important;
 }
+
+/* =================================================================
+   Punto 8: ESTILO DE TÍTULOS Y TEXTOS (IMAGEN PARA TÍTULO H3 SOLAMENTE)
+   ================================================================= */
+
+/* 1. ESTILO PARA EL TÍTULO H3 (Selector MÁS ESPECÍFICO) */
+/* Combinamos data-testid="stHeading" con el selector de caché interno. */
+div[data-testid="stHeading"] .st-emotion-cache-3uj0rx { 
+    /* --- APLICAMOS IMAGEN DE FONDO SÓLO AL TÍTULO H3 --- */
+    background-image: url("https://images.pexels.com/photos/1760410/pexels-photo-1760410.jpeg"); /* <-- URL de tu imagen de título */
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat;
+    
+    background-blend-mode: overlay; 
+    background-color: rgba(255, 255, 255, 0.7) !important; /* Capa blanca semi-transparente */
+    
+    padding: 10px 15px; /* Padding uniforme */
+    border-radius: 10px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08); 
+    margin-bottom: 5px; /* Margen para no tocar el texto azul */
+}
+
+
+/* 2. Regla para asegurar que el texto sea oscuro */
+div[data-testid="stHeading"] .st-emotion-cache-3uj0rx h3 {
+    color: #333333 !important; 
+    text-shadow: none !important; 
+}
+
+
+/* --- Reglas para el Texto Azul (st.info/st.markdown) --- */
+/* (DEBEMOS ASEGURARNOS DE QUE ESTOS BLOQUES SIGAN SIENDO BLANCOS/CLAROS) */
+/* Si tu texto azul está dentro de st.info, usa esta regla: */
+.stAlert {
+    background-color: #F8F8FF !important; /* Un fondo muy claro para legibilidad */
+    border-radius: 10px;
+    padding: 15px;
+}
+/* Asegura que el texto azul sea oscuro */
+.stAlert p {
+    color: #333333 !important; 
+}
