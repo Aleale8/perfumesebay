@@ -118,7 +118,7 @@ with col_pie2:
             title='Distribución por Género',
             color='Genero',
             color_discrete_map={'Hombre':'#3366CC', 'Mujer':'#FF66B2'},
-            hole=0.4
+            hole=0.4,
             template='plotly_white' # <-- 1. Usar un template claro
         )
         # 2. HACER EL FONDO DEL GRÁFICO TRANSPARENTE (CRÍTICO)
