@@ -160,15 +160,32 @@ div[data-testid="stHeading"] .st-emotion-cache-3uj0rx h3 {
    Punto 9: LIMPIEZA FINAL DE CONTENEDORES DE GRÁFICOS (DETRÁS DEL TÍTULO)
    ================================================================= */
 
-/* Hacemos transparente el contenedor padre (stElementContainer) del título H3 */
-.st-emotion-cache-1vo6xi6 {
+/* 1. Hacemos que el contenedor externo del título (stHeading) sea transparente */
+div[data-testid="stHeading"] {
     background-color: transparent !important;
-    padding: 0 !important; /* También quitamos el padding si lo tiene */
-    margin: 0 !important;
 }
 
-/* 2. Repetimos el arreglo para el contenedor padre de las KPIs, si fuera necesario */
-.st-emotion-cache-1gsv4e8 { /* Contenedor de columnas de KPIs */
-    background-color: transparent !important;
-    padding: 0 !important;
+/* 2. ESTILO PARA LA CAPA CON IMAGEN (Selector de Markdown Container del H3) */
+/* Este div es el que debe tener la imagen y el padding */
+.st-emotion-cache-3uj0rx { 
+    /* --- APLICAMOS IMAGEN DE FONDO --- */
+    background-image: url("https://images.pexels.com/photos/1760410/pexels-photo-1760410.jpeg"); /* <-- URL de tu imagen de título */
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat;
+    
+    background-blend-mode: overlay; 
+    background-color: rgba(255, 255, 255, 0.7) !important; /* Capa blanca semi-transparente */
+    
+    padding: 10px 15px; 
+    border-radius: 10px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08); 
+    margin-bottom: 5px;
+}
+
+
+/* 3. Aseguramos que el texto del H3 siga siendo legible */
+.st-emotion-cache-3uj0rx h3 {
+    color: #333333 !important; 
+    text-shadow: none !important; 
 }
