@@ -57,3 +57,29 @@
     box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.05); 
     background-color: #F8F8FF; /* Fondo Blanco Fantasma para contraste limpio */
 }
+
+/* =================================================================
+   Punto 5: LIMPIEZA DE COLORES POR DEFECTO (ELIMINAR MORADO)
+   ================================================================= */
+
+/* 1. Fondo de Subtítulos y Títulos (como "1. Composición del Mercado") */
+.stHeading {
+    /* Fondo blanco para que el título resalte */
+    background-color: #FFFFFF; 
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Sombra suave */
+}
+
+/* 2. Fondo de Bloques de Información (st.info, st.warning, st.error) */
+.stAlert, .stNotification {
+    background-color: #FFFFFF !important; /* Fondo blanco forzado */
+    border-radius: 10px;
+    border: 1px solid #FFC3A0; /* Borde suave */
+}
+
+/* 3. Fondo del Bloque del Encabezado (Para evitar cualquier conflicto de color base) */
+/* El color del texto morado también puede provenir del estilo por defecto. */
+.stHeading > div > div > h1, .stHeading > div > div > h2, .stHeading > div > div > h3 {
+    color: #4B0082 !important; /* Asegurar un color de texto oscuro y bonito */
+}
