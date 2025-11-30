@@ -197,3 +197,20 @@ header[data-testid="stHeader"] { /* Usamos ambos selectores para máxima compati
     background-color: transparent !important;
     color: #333333 !important;
 }
+
+/* =================================================================
+   Punto 11: ARREGLAR TEXTO DEL MULTISELECT SELECCIONADO (CHIPS)
+   ================================================================= */
+
+/* 1. Selector que apunta al texto dentro de las pastillas seleccionadas */
+.stMultiSelect div[data-testid="stValueLabel"] {
+    /* Forzamos el color del texto a oscuro */
+    color: #333333 !important; 
+    font-weight: bold !important; /* Opcional: hacemos el texto más fuerte */
+}
+
+/* 2. Selector alternativo/complementario para el botón del chip */
+/* Esto puede ser necesario si el selector anterior no es suficiente */
+.stMultiSelect button.st-b3 span {
+    color: #333333 !important; 
+}
