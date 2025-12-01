@@ -165,11 +165,6 @@ st.divider()
 # --- SECCIÓN GRÁFICA 3, 4 y 5: PESTAÑAS ---
 st.subheader("3. Análisis Detallado de Precios")
 
-
-
-[Image of box plot vs violin plot comparison]
-
-
 # Explicamos la diferencia visualmente al usuario
 st.caption("Usa las pestañas para cambiar entre vista estadística (Cajas), detalle (Puntos) y densidad (Violín).")
 
