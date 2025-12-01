@@ -211,25 +211,40 @@ with tab2:
     else:
         st.warning("Selecciona marcas para visualizar los puntos.")
 
-# PESTAÑA 3: VIOLIN PLOT
+# PESTAÑA 3: VIOLIN PLOT (CORREGIDO)
 with tab3:
     st.markdown("**Densidad de Precios por Género (Violín)**")
-    df_violin = df_global[df_global['Precio'] < 300] # Filtro de outliers visuales
+    
+    # --- NUEVA ADVERTENCIA ---
+    # Si el usuario no seleccionó "Ambos" en la barra lateral, le avisamos.
+    if genero_selec != "Ambos":
+        st.info(f"💡 Nota: Actualmente estás filtrando solo por **{genero_selec}** en la barra lateral. Para ver la comparación 'Hombres vs Mujeres', selecciona 'Ambos' en el menú de la izquierda.")
+
+    # Filtro de outliers visuales (precios menores a 300)
+    df_violin = df_global[df_global['Precio'] < 300]
     
     if not df_violin.empty:
+        # GRÁFICO 5: VIOLIN PLOT 
         fig_violin = px.violin(
-            df_violin, y="Precio", x="Genero", color="Genero",
-            box=True, points="all",
+            df_violin, 
+            y="Precio", 
+            x="Genero", 
+            color="Genero",
+            box=True,  
+            points="outliers", 
             hover_data=['Marca', 'Titulo'],
-            title="Densidad de Precios: Hombres vs Mujeres (< $300)",
+            title="Densidad de Precios: Distribución y Mediana",
             color_discrete_map={'Hombre':'#ADC6D1', 'Mujer':'#E49AC2'},
             template='plotly_white'
         )
-        fig_violin.update_layout(yaxis_title="Precio ($)")
+        # Un poco más de altura para que respire
+        fig_violin.update_layout(yaxis_title="Precio ($)", height=500)
         st.plotly_chart(fig_violin, use_container_width=True)
+        st.caption("Nota: La línea dentro del violín representa el rango intercuartílico y la mediana de precios. Se han omitido productos > $300.")
     else:
-        st.warning("No hay suficientes datos.")
+        st.warning("No hay suficientes datos para generar el gráfico con los filtros actuales.")
 
-# --- DATOS FINALES ---
+
+# Datos globales 
 with st.expander("Ver Base de Datos Completa"):
     st.dataframe(df_global)
