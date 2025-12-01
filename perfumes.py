@@ -123,7 +123,7 @@ with tab1: # Box Plot
     if sel:
         fig = px.box(df_global[df_global['Marca'].isin(sel)], x='Marca', y='Precio', color='Marca', points="outliers", title="Rangos de Precio por Marca")
         st.plotly_chart(fig, use_container_width=True)
-        st.caption("📝 **Leyenda (Box Plot):** La 'caja' contiene el 50% de los precios más comunes. La línea del medio es la **mediana**. Los puntos sueltos arriba son 'precios atípicos' (perfumes inusualmente caros).")
+        st.caption("📝 La 'caja' contiene el 50% de los precios más comunes. La línea del medio es la **mediana**. Los puntos sueltos arriba son 'precios atípicos' (perfumes inusualmente caros).")
 
 with tab2: # Strip Plot
     sel = st.multiselect("Ver puntos de:", options=marcas, default=df_global['Marca'].value_counts().head(10).index.tolist(), key="strip")
@@ -137,7 +137,7 @@ with tab2: # Strip Plot
             stripmode='overlay'
         )
         st.plotly_chart(fig, use_container_width=True)
-        st.caption("📝 **Leyenda (Strip Plot):** Cada punto representa **un perfume único**. Esto permite ver la cantidad real de productos y su dispersión de precios. Los puntos azules son de hombre y los rosas de mujer.")
+        st.caption("📝 Cada punto representa **un perfume único**. Esto permite ver la cantidad real de productos y su dispersión de precios. Los puntos azules son de hombre y los rosas de mujer.")
 
 with tab3: # Violin Plot
     df_clean = df_global[df_global['Precio'] < 300] # Filtro visual
@@ -151,7 +151,7 @@ with tab3: # Violin Plot
             title="Densidad de Precios"
         )
         st.plotly_chart(fig, use_container_width=True)
-        st.caption("📝 **Leyenda (Violin Plot):** El ancho de la figura indica la **frecuencia**: cuanto más ancho, más perfumes hay a ese precio. Permite comparar si los precios de un género están más concentrados o dispersos que el otro.")
+        st.caption("📝 El ancho de la figura indica la **frecuencia**: cuanto más ancho, más perfumes hay a ese precio. Permite comparar si los precios de un género están más concentrados o dispersos que el otro.")
     else:
         st.warning("Sin datos suficientes.")
 
