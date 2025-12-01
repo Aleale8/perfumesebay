@@ -2,23 +2,20 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 
-# --- CONFIGURACIÓN INICIAL ---
 st.set_page_config(page_title="Perfumes eBay - Proyecto Final", layout="wide")
 
-# --- COLORES GLOBALES (Para consistencia visual) ---
-# Usamos colores fuertes para diferenciar claramente los géneros en todos los gráficos
-MAPA_COLORES = {'Hombre': '#1f77b4', 'Mujer': '#e377c2'}  # Azul vs Rosa intenso
+# Usamos colores para diferenciar géneros en todos los gráficos
+MAPA_COLORES = {'Hombre': '#1f77b4', 'Mujer': '#e377c2'}  
 
-def cargar_css(file_name):
+def cargar_css(archivo):
     try:
-        with open(file_name) as f:
+        with open(archivo) as f:
             st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
     except FileNotFoundError:
-        st.warning(f"⚠️ Sin estilos: No se encontró '{file_name}'.")
+        st.warning(f"⚠️ Sin estilos: No se encontró '{archivo}'.")
 
 cargar_css('estilo.css')
-
-# --- CARGA Y LIMPIEZA DE DATOS ---
+# Limpieza de datos
 @st.cache_data
 def cargar_datos():
     try:
@@ -43,22 +40,22 @@ def limpiar_numero(texto, es_float=True):
 df = cargar_datos()
 
 if df is None:
-    st.error("⚠️ Error Crítico: Faltan los archivos CSV.")
+    st.error("Faltan los archivos CSV.")
     st.stop()
 
 # Aplicar limpieza
 df['Precio'] = df['Precio_Texto'].apply(lambda x: limpiar_numero(x, True))
 df['Vendidos'] = df['Vendidos_Texto'].apply(lambda x: limpiar_numero(x, False))
 
-# --- SIDEBAR (FILTROS) ---
-st.sidebar.title("Cámara de Esencias 🌸")
+# SIDEBAR 
+st.sidebar.title("Gestión de Perfumería 🌸")
 st.sidebar.markdown("Panel de Control")
 genero_filtro = st.sidebar.radio("Género:", ["Ambos", "Hombre", "Mujer"])
 
 # Filtrado Global
 df_global = df if genero_filtro == "Ambos" else df[df['Genero'] == genero_filtro]
 
-# --- INTERFAZ PRINCIPAL ---
+# INTERFAZ PRINCIPAL
 st.markdown("""
     <div class="main-header" style='text-align: center; color: #6F4E37;'>
         <h1 style='font-family: Georgia;'>🌸 Análisis de Mercado: Perfumes eBay 🌸</h1>
@@ -67,7 +64,6 @@ st.markdown("""
     <hr>
 """, unsafe_allow_html=True)
 
-# KPIs
 col1, col2, col3, col4 = st.columns(4)
 col1.metric("Total Productos", df_global.shape[0])
 col2.metric("Precio Promedio", f"${df_global['Precio'].mean():.2f}")
@@ -75,8 +71,7 @@ col3.metric("Total Ventas", f"{df_global['Vendidos'].sum():,.0f}")
 col4.metric("Marcas Únicas", df_global['Marca'].nunique())
 st.divider()
 
-# --- GRÁFICOS ---
-
+# GRÁFICOS
 # 1. TORTA (Composición)
 st.subheader("1. Composición del Mercado")
 c1, c2 = st.columns([1, 2])
@@ -89,16 +84,16 @@ if genero_filtro == "Ambos":
         title='Distribución de Productos por Género', 
         color='Genero', 
         hole=0.4, 
-        color_discrete_map=MAPA_COLORES # <--- Colores arreglados
+        color_discrete_map=MAPA_COLORES
     )
     c2.plotly_chart(fig, use_container_width=True)
-    c2.caption("📝 **Leyenda:** El anillo muestra la proporción total. Si seleccionas una sección, verás la cantidad exacta de perfumes.")
+    c2.caption("📝 El anillo muestra la proporción total. Si seleccionas una sección, verás la cantidad exacta de perfumes.")
 else:
     c2.warning("Selecciona 'Ambos' en el filtro lateral para ver la comparación.")
 
 st.divider()
 
-# 2. BARRAS (Ranking)
+# BARRAS (Ranking)
 st.subheader("2. Ranking de Ventas")
 c1, c2 = st.columns([1, 3])
 c1.markdown("Explora los líderes en ventas.")
@@ -108,18 +103,17 @@ marca_sel = c1.selectbox("Marca:", ["Todas"] + marcas)
 if marca_sel == "Todas":
     data = df_global.groupby('Marca')['Vendidos'].sum().sort_values(ascending=False).head(10).reset_index()
     fig = px.bar(data, x='Marca', y='Vendidos', color='Vendidos', title="Top 10 Marcas Más Vendidas", color_continuous_scale='Teal')
-    desc = "📝 **Leyenda:** Muestra las 10 marcas con mayor volumen de ventas acumulado. El color más oscuro indica más ventas."
+    desc = "📝 Muestra las 10 marcas con mayor volumen de ventas acumulado. El color más oscuro indica más ventas."
 else:
     data = df_global[df_global['Marca'] == marca_sel].sort_values('Vendidos', ascending=False).head(10)
     fig = px.bar(data, x='Vendidos', y='Titulo', orientation='h', title=f"Top Productos: {marca_sel}", color='Vendidos', color_continuous_scale='Teal')
-    desc = f"📝 **Leyenda:** Muestra los 10 perfumes específicos más exitosos de la marca {marca_sel}."
+    desc = f"📝 Muestra los 10 perfumes específicos más exitosos de la marca {marca_sel}. Si solo tiene una barra grande, o menor a 5, quiere decir que solo tiene sa cantidad de perfumes."
 
 c2.plotly_chart(fig, use_container_width=True)
 c2.caption(desc)
 
 st.divider()
-
-# 3. ANÁLISIS DE PRECIOS (Pestañas)
+# ANÁLISIS DE PRECIOS
 st.subheader("3. Análisis Detallado de Precios")
 st.markdown("Utiliza las pestañas para ver diferentes perspectivas de los precios:")
 tab1, tab2, tab3 = st.tabs(["📊 Cajas (Comparar Marcas)", "📍 Puntos (Detalle Individual)", "🎻 Violín (Densidad Género)"])
